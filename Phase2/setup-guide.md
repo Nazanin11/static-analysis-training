@@ -211,5 +211,62 @@ Verify installation.
 ```bash
 codeql version
 ```
+## Downloading CodeQL Query Packs
 
+The CodeQL CLI provides the analysis engine, while the language-specific query packs are distributed separately. These packs were downloaded after installing the CLI.
+
+Download the required query packs:
+
+```bash
+codeql pack download codeql/cpp-queries
+codeql pack download codeql/csharp-queries
+codeql pack download codeql/java-queries
+codeql pack download codeql/javascript-queries
+codeql pack download codeql/python-queries
+codeql pack download codeql/go-queries
+codeql pack download codeql/ruby-queries
+codeql pack download codeql/swift-queries
+codeql pack download codeql/rust-queries
+codeql pack download codeql/actions-queries
+```
+
+Downloaded query packs are stored in:
+
+```text
+~/.codeql/packages
+```
+
+Verify that the packs are available:
+
+```bash
+codeql resolve packs
+```
+
+Verify the supported languages:
+
+```bash
+codeql resolve languages
+```
+
+Example output:
+
+```
+cpp
+java
+javascript
+python
+go
+csharp
+ruby
+swift
+rust
+actions
+```
+
+## Notes
+
+- The CodeQL CLI installation does not include all query packs by default.
+- Query packs are downloaded automatically into the local package cache (`~/.codeql/packages`).
+- Some optional packs (such as `xml-queries`, `yaml-queries`, and `properties-queries`) are not publicly available and may return **HTTP 403 Forbidden** when downloaded. These packs are not required for analyzing C/C++ projects.
+- The downloaded packs are reused for future analyses and normally do not need to be downloaded again.
 ---
