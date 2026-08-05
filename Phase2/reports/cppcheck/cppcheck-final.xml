@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.13.0"/>
+    <errors>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="obj/conf/cf-parse.tab.c">
+            <location file="proto/ospf/config.Y" line="97" column="5"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="obj/conf/cf-lex.c">
+            <location file="conf/cf-lex.l" line="486" column="19"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="obj/conf/cf-lex.c">
+            <location file="conf/cf-lex.l" line="487" column="14"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="nullPointerArithmeticRedundantCheck" severity="warning" msg="Either the condition &apos;!e&apos; is redundant or there is pointer arithmetic with NULL pointer." verbose="Either the condition &apos;!e&apos; is redundant or there is pointer arithmetic with NULL pointer." cwe="682" inconclusive="true" file0="obj/conf/cf-lex.c">
+            <location file="conf/cf-lex.l" line="196" column="19" info="Null pointer addition"/>
+            <location file="conf/cf-lex.l" line="197" column="7" info="Assuming that condition &apos;!e&apos; is not redundant"/>
+        </error>
+        <error id="nullPointerArithmeticRedundantCheck" severity="warning" msg="Either the condition &apos;!e&apos; is redundant or there is pointer arithmetic with NULL pointer." verbose="Either the condition &apos;!e&apos; is redundant or there is pointer arithmetic with NULL pointer." cwe="682" inconclusive="true" file0="obj/conf/cf-lex.c">
+            <location file="conf/cf-lex.l" line="233" column="19" info="Null pointer addition"/>
+            <location file="conf/cf-lex.l" line="234" column="7" info="Assuming that condition &apos;!e&apos; is not redundant"/>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="253" column="9"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="267" column="6"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="293" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="326" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="335" column="7"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="387" column="4"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="391" column="2"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="467" column="4"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="473" column="4"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="510" column="3"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="515" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="545" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="conf/conf.c">
+            <location file="conf/conf.c" line="547" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="preprocessorErrorDirective" severity="error" msg="failed to expand &apos;runtime&apos;, it is invalid to use a preprocessor directive as macro parameter" verbose="failed to expand &apos;runtime&apos;, it is invalid to use a preprocessor directive as macro parameter">
+            <location file="filter/f-inst.c" line="299" column="0"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="filter/tree.c">
+            <location file="filter/tree.c" line="104" column="11"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="preprocessorErrorDirective" severity="error" msg="failed to expand &apos;ipa_getbits&apos;, Wrong number of parameters for macro &apos;ipa_getbits&apos;." verbose="failed to expand &apos;ipa_getbits&apos;, Wrong number of parameters for macro &apos;ipa_getbits&apos;.">
+            <location file="filter/trie.c" line="368" column="0"/>
+        </error>
+        <error id="syntaxError" severity="error" msg="Unmatched &apos;{&apos;. Configuration: &apos;BIRD_VERSION=2.17.1&apos;." verbose="Unmatched &apos;{&apos;. Configuration: &apos;BIRD_VERSION=2.17.1&apos;." file0="obj/filter/inst-gen.c">
+            <location file="filter/decl.m4" line="837" column="1"/>
+        </error>
+        <error id="nullPointer" severity="warning" msg="Possible null pointer dereference: n" verbose="Possible null pointer dereference: n" cwe="476" inconclusive="true" file0="lib/lists.c">
+            <location file="lib/lists.c" line="38" column="16" info="Null pointer dereference"/>
+            <location file="lib/lists.c" line="219" column="33" info="Calling function &apos;check_list&apos;, 2nd argument &apos;NULL&apos; value is 0"/>
+            <symbol>n</symbol>
+        </error>
+        <error id="nullPointer" severity="warning" msg="Possible null pointer dereference: n" verbose="Possible null pointer dereference: n" cwe="476" inconclusive="true" file0="lib/lists.c">
+            <location file="lib/lists.c" line="40" column="14" info="Null pointer dereference"/>
+            <location file="lib/lists.c" line="219" column="33" info="Calling function &apos;check_list&apos;, 2nd argument &apos;NULL&apos; value is 0"/>
+            <symbol>n</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="lib/mac.c">
+            <location file="lib/mac.c" line="102" column="18"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="lib/mac.c">
+            <location file="lib/mac.c" line="103" column="15"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="selfAssignment" severity="warning" msg="Redundant assignment of &apos;z&apos; to itself." verbose="Redundant assignment of &apos;z&apos; to itself." cwe="398" file0="lib/patmatch.c">
+            <location file="lib/patmatch.c" line="33" column="6"/>
+            <symbol>z</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="lib/resource.c">
+            <location file="lib/resource.c" line="108" column="3"/>
+        </error>
+        <error id="negativeIndex" severity="error" msg="Array &apos;w[16]&apos; accessed at index -2, which is out of bounds." verbose="Array &apos;w[16]&apos; accessed at index -2, which is out of bounds." cwe="786" file0="lib/sha512.c">
+            <location file="lib/sha512.c" line="168" column="16" info="Negative array index"/>
+            <location file="lib/sha512.c" line="154" column="12" info="Assignment &apos;t=0&apos;, assigned value is 0"/>
+        </error>
+        <error id="negativeIndex" severity="error" msg="Array &apos;w[16]&apos; accessed at index -7, which is out of bounds." verbose="Array &apos;w[16]&apos; accessed at index -7, which is out of bounds." cwe="786" file0="lib/sha512.c">
+            <location file="lib/sha512.c" line="168" column="37" info="Negative array index"/>
+            <location file="lib/sha512.c" line="154" column="12" info="Assignment &apos;t=0&apos;, assigned value is 0"/>
+        </error>
+        <error id="negativeIndex" severity="error" msg="Array &apos;w[16]&apos; accessed at index -15, which is out of bounds." verbose="Array &apos;w[16]&apos; accessed at index -15, which is out of bounds." cwe="786" file0="lib/sha512.c">
+            <location file="lib/sha512.c" line="168" column="52" info="Negative array index"/>
+            <location file="lib/sha512.c" line="154" column="12" info="Assignment &apos;t=0&apos;, assigned value is 0"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_TLIST_DELSAFE is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_TLIST_DELSAFE is a macro then please configure it." file0="lib/slab.c">
+            <location file="lib/slab.c" line="365" column="3"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="lib/timer.c">
+            <location file="lib/timer.c" line="370" column="16"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If 2.17.1 is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If 2.17.1 is a macro then please configure it." file0="nest/cli.c">
+            <location file="nest/cli.c" line="200" column="28"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="nest/iface.c">
+            <location file="nest/iface.c" line="113" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If HASH_DEFINE_REHASH_FN is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If HASH_DEFINE_REHASH_FN is a macro then please configure it." file0="nest/mpls.c">
+            <location file="nest/mpls.c" line="675" column="1"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="nest/neighbor.c">
+            <location file="nest/neighbor.c" line="186" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_FIRST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_FIRST is a macro then please configure it." file0="nest/proto.c">
+            <location file="nest/proto.c" line="245" column="3"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="nest/rt-attr.c">
+            <location file="nest/rt-attr.c" line="579" column="14"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;e&apos; is redundant or there is possible null pointer dereference: e." verbose="Either the condition &apos;e&apos; is redundant or there is possible null pointer dereference: e." cwe="476" file0="nest/rt-attr.c">
+            <location file="nest/rt-attr.c" line="1079" column="15" info="Null pointer dereference"/>
+            <location file="nest/rt-attr.c" line="1056" column="10" info="Assuming that condition &apos;e&apos; is not redundant"/>
+            <symbol>e</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)n&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)n&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="nest/rt-attr.c">
+            <location file="nest/rt-attr.c" line="804" column="35"/>
+            <symbol>(void*)n</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="nest/rt-dev.c">
+            <location file="nest/rt-dev.c" line="112" column="5"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="nest/rt-fib.c">
+            <location file="nest/rt-fib.c" line="386" column="18"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="nest/rt-show.c">
+            <location file="nest/rt-show.c" line="237" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST2 is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST2 is a macro then please configure it." file0="nest/rt-table.c">
+            <location file="nest/rt-table.c" line="1797" column="3"/>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="proto/aggregator/aggregator.c">
+            <location file="proto/aggregator/aggregator.c" line="469" column="13"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="proto/aggregator/aggregator.c">
+            <location file="proto/aggregator/aggregator.c" line="645" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_DELSAFE is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_DELSAFE is a macro then please configure it." file0="proto/bfd/bfd.c">
+            <location file="proto/bfd/bfd.c" line="754" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If tm_remains is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If tm_remains is a macro then please configure it." file0="proto/bfd/io.c">
+            <location file="proto/bfd/io.c" line="497" column="18"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/bfd/packets.c">
+            <location file="proto/bfd/packets.c" line="263" column="23"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="proto/babel/babel.c">
+            <location file="proto/babel/babel.c" line="984" column="5"/>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;p&apos; is of type &apos;const void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;p&apos; is of type &apos;const void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/babel/packets.c">
+            <location file="proto/babel/packets.c" line="311" column="44"/>
+            <symbol>p</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;p&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;p&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/babel/packets.c">
+            <location file="proto/babel/packets.c" line="317" column="12"/>
+            <symbol>p</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;p&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;p&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/babel/packets.c">
+            <location file="proto/babel/packets.c" line="318" column="12"/>
+            <symbol>p</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)hdr&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)hdr&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/babel/packets.c">
+            <location file="proto/babel/packets.c" line="1375" column="3"/>
+            <symbol>(void*)hdr</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If HASH_DEFINE_REHASH_FN is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If HASH_DEFINE_REHASH_FN is a macro then please configure it." file0="proto/bgp/attrs.c">
+            <location file="proto/bgp/attrs.c" line="1532" column="1"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_DELSAFE is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_DELSAFE is a macro then please configure it." file0="proto/bgp/bgp.c">
+            <location file="proto/bgp/bgp.c" line="617" column="5"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/bgp/packets.c">
+            <location file="proto/bgp/packets.c" line="2114" column="19"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/bgp/packets.c">
+            <location file="proto/bgp/packets.c" line="2209" column="19"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/bgp/packets.c">
+            <location file="proto/bgp/packets.c" line="2442" column="16"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="shiftTooManyBitsSigned" severity="portability" msg="Shifting signed 32-bit value by 31 bits is implementation-defined behaviour" verbose="Shifting signed 32-bit value by 31 bits is implementation-defined behaviour" cwe="758" file0="proto/bgp/packets.c">
+            <location file="proto/bgp/packets.c" line="3131" column="14" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBitsSigned" severity="portability" msg="Shifting signed 32-bit value by 31 bits is implementation-defined behaviour" verbose="Shifting signed 32-bit value by 31 bits is implementation-defined behaviour" cwe="758" file0="proto/bgp/packets.c">
+            <location file="proto/bgp/packets.c" line="3139" column="31" info="Shift"/>
+        </error>
+        <error id="shiftTooManyBitsSigned" severity="portability" msg="Shifting signed 32-bit value by 31 bits is implementation-defined behaviour" verbose="Shifting signed 32-bit value by 31 bits is implementation-defined behaviour" cwe="758" inconclusive="true" file0="proto/bgp/packets.c">
+            <location file="proto/bgp/packets.c" line="3239" column="32" info="Shift"/>
+            <location file="proto/bgp/packets.c" line="3443" column="35" info="Calling function &apos;bgp_schedule_packet&apos;, 3rd argument &apos;0x1f&apos; value is 31"/>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/l3vpn/l3vpn.c">
+            <location file="proto/l3vpn/l3vpn.c" line="160" column="17"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/l3vpn/l3vpn.c">
+            <location file="proto/l3vpn/l3vpn.c" line="199" column="14"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If current_real_time is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If current_real_time is a macro then please configure it." file0="proto/mrt/mrt.c">
+            <location file="proto/mrt/mrt.c" line="164" column="19"/>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/dbdes.c">
+            <location file="proto/ospf/dbdes.c" line="62" column="26"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="proto/ospf/hello.c">
+            <location file="proto/ospf/hello.c" line="165" column="5"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_DELSAFE is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_DELSAFE is a macro then please configure it." file0="proto/ospf/iface.c">
+            <location file="proto/ospf/iface.c" line="267" column="3"/>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsack.c">
+            <location file="proto/ospf/lsack.c" line="38" column="26"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="91" column="5"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="481" column="22"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="482" column="7"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="487" column="9"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="514" column="22"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="515" column="7"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsalib.c">
+            <location file="proto/ospf/lsalib.c" line="520" column="9"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsreq.c">
+            <location file="proto/ospf/lsreq.c" line="32" column="26"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="55" column="27"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="62" column="27"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="90" column="50"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="370" column="50"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="372" column="48"/>
+            <symbol>(void*)buf</symbol>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;(void*)pkt&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="516" column="28"/>
+            <symbol>(void*)pkt</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;flood_queue_used" verbose="Uninitialized variable: ifa-&gt;flood_queue_used" cwe="457" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="226" column="14"/>
+            <symbol>ifa-&gt;flood_queue_used</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;stub" verbose="Uninitialized variable: ifa-&gt;stub" cwe="457" file0="proto/ospf/lsupd.c">
+            <location file="proto/ospf/lsupd.c" line="260" column="14"/>
+            <symbol>ifa-&gt;stub</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variables: neigh.n, neigh.pool, neigh.ifa, neigh.state, neigh.gr_active, neigh.got_my_rt_lsa, neigh.inactim, neigh.imms, neigh.myimms, neigh.dds, neigh.ddr, neigh.rid, neigh.ip, neigh.priority, neigh.options, neigh.dr, neigh.bdr, neigh.iface_id, neigh.dbsi, neigh.lsrql, neigh.lsrqh, neigh.lsrqi, neigh.lsrtl, neigh.lsrth, neigh.dbdes_timer, neigh.lsrq_timer, neigh.lsrt_timer, neigh.ackd_timer, neigh.gr_timer, neigh.bfd_req, neigh.ldd_buffer, neigh.ldd_bsize, neigh.csn" verbose="Uninitialized variables: neigh.n, neigh.pool, neigh.ifa, neigh.state, neigh.gr_active, neigh.got_my_rt_lsa, neigh.inactim, neigh.imms, neigh.myimms, neigh.dds, neigh.ddr, neigh.rid, neigh.ip, neigh.priority, neigh.options, neigh.dr, neigh.bdr, neigh.iface_id, neigh.dbsi, neigh.lsrql, neigh.lsrqh, neigh.lsrqi, neigh.lsrtl, neigh.lsrth, neigh.dbdes_timer, neigh.lsrq_timer, neigh.lsrt_timer, neigh.ackd_timer, neigh.gr_timer, neigh.bfd_req, neigh.ldd_buffer, neigh.ldd_bsize, neigh.csn" cwe="457" file0="proto/ospf/neighbor.c">
+            <location file="proto/ospf/neighbor.c" line="561" column="27"/>
+            <symbol>neigh</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variables: neigh.n, neigh.pool, neigh.ifa, neigh.state, neigh.gr_active, neigh.got_my_rt_lsa, neigh.inactim, neigh.imms, neigh.myimms, neigh.dds, neigh.ddr, neigh.rid, neigh.ip, neigh.priority, neigh.options, neigh.dr, neigh.bdr, neigh.iface_id, neigh.dbsi, neigh.lsrql, neigh.lsrqh, neigh.lsrqi, neigh.lsrtl, neigh.lsrth, neigh.dbdes_timer, neigh.lsrq_timer, neigh.lsrt_timer, neigh.ackd_timer, neigh.gr_timer, neigh.bfd_req, neigh.ldd_buffer, neigh.ldd_bsize, neigh.csn" verbose="Uninitialized variables: neigh.n, neigh.pool, neigh.ifa, neigh.state, neigh.gr_active, neigh.got_my_rt_lsa, neigh.inactim, neigh.imms, neigh.myimms, neigh.dds, neigh.ddr, neigh.rid, neigh.ip, neigh.priority, neigh.options, neigh.dr, neigh.bdr, neigh.iface_id, neigh.dbsi, neigh.lsrql, neigh.lsrqh, neigh.lsrqi, neigh.lsrtl, neigh.lsrth, neigh.dbdes_timer, neigh.lsrq_timer, neigh.lsrt_timer, neigh.ackd_timer, neigh.gr_timer, neigh.bfd_req, neigh.ldd_buffer, neigh.ldd_bsize, neigh.csn" cwe="457" file0="proto/ospf/neighbor.c">
+            <location file="proto/ospf/neighbor.c" line="614" column="27"/>
+            <symbol>neigh</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="proto/ospf/ospf.c">
+            <location file="proto/ospf/ospf.c" line="321" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If current_real_time is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If current_real_time is a macro then please configure it." file0="proto/ospf/packet.c">
+            <location file="proto/ospf/packet.c" line="90" column="25"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="proto/ospf/rt.c">
+            <location file="proto/ospf/rt.c" line="1701" column="3"/>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="826" column="7"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="ignoredReturnValue" severity="warning" msg="Return value of function log() is not used." verbose="Return value of function log() is not used." cwe="252" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="925" column="7"/>
+            <symbol>log</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: sn-&gt;summary" verbose="Uninitialized variable: sn-&gt;summary" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="693" column="13"/>
+            <symbol>sn-&gt;summary</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: neigh-&gt;state" verbose="Uninitialized variable: neigh-&gt;state" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="718" column="16"/>
+            <symbol>neigh-&gt;state</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;cost" verbose="Uninitialized variable: ifa-&gt;cost" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="776" column="52"/>
+            <symbol>ifa-&gt;cost</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;type" verbose="Uninitialized variable: ifa-&gt;type" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="889" column="15"/>
+            <symbol>ifa-&gt;type</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: n-&gt;state" verbose="Uninitialized variable: n-&gt;state" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="978" column="12"/>
+            <symbol>n-&gt;state</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: n-&gt;state" verbose="Uninitialized variable: n-&gt;state" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="1003" column="12"/>
+            <symbol>n-&gt;state</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;oa" verbose="Uninitialized variable: ifa-&gt;oa" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="1262" column="15"/>
+            <symbol>ifa-&gt;oa</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;type" verbose="Uninitialized variable: ifa-&gt;type" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="1415" column="14"/>
+            <symbol>ifa-&gt;type</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;oa" verbose="Uninitialized variable: ifa-&gt;oa" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="1535" column="15"/>
+            <symbol>ifa-&gt;oa</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: oa-&gt;update_rt_lsa" verbose="Uninitialized variable: oa-&gt;update_rt_lsa" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="1874" column="13"/>
+            <symbol>oa-&gt;update_rt_lsa</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ifa-&gt;type" verbose="Uninitialized variable: ifa-&gt;type" cwe="457" file0="proto/ospf/topology.c">
+            <location file="proto/ospf/topology.c" line="1907" column="14"/>
+            <symbol>ifa-&gt;type</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/perf/perf.c">
+            <location file="proto/perf/perf.c" line="38" column="12"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="proto/pipe/pipe.c">
+            <location file="proto/pipe/pipe.c" line="70" column="11"/>
+            <symbol>alloca</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: ccf-&gt;payload" verbose="Uninitialized variable: ccf-&gt;payload" cwe="457" file0="proto/radv/packets.c">
+            <location file="proto/radv/packets.c" line="272" column="22"/>
+            <symbol>ccf-&gt;payload</symbol>
+        </error>
+        <error id="uninitvar" severity="error" msg="Uninitialized variable: px-&gt;valid" verbose="Uninitialized variable: px-&gt;valid" cwe="457" file0="proto/radv/packets.c">
+            <location file="proto/radv/packets.c" line="369" column="14"/>
+            <symbol>px-&gt;valid</symbol>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST is a macro then please configure it." file0="proto/radv/radv.c">
+            <location file="proto/radv/radv.c" line="121" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If current_real_time is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If current_real_time is a macro then please configure it." file0="proto/rip/packets.c">
+            <location file="proto/rip/packets.c" line="232" column="27"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_FIRST is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST_FIRST is a macro then please configure it." file0="proto/rip/rip.c">
+            <location file="proto/rip/rip.c" line="600" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If BUFFER_WALK is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If BUFFER_WALK is a macro then please configure it." file0="proto/static/static.c">
+            <location file="proto/static/static.c" line="252" column="5"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If HASH_DEFINE_REHASH_FN is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If HASH_DEFINE_REHASH_FN is a macro then please configure it." file0="sysdep/linux/netlink.c">
+            <location file="sysdep/linux/netlink.c" line="1286" column="1"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If tm_remains is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If tm_remains is a macro then please configure it." file0="sysdep/unix/io.c">
+            <location file="sysdep/unix/io.c" line="2484" column="13"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST2 is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If WALK_LIST2 is a macro then please configure it." file0="sysdep/unix/krt.c">
+            <location file="sysdep/unix/krt.c" line="822" column="3"/>
+        </error>
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If PATH_CONFIG_FILE is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If PATH_CONFIG_FILE is a macro then please configure it." file0="sysdep/unix/main.c">
+            <location file="sysdep/unix/main.c" line="847" column="32"/>
+        </error>
+        <error id="arithOperationsOnVoidPointer" severity="portability" msg="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined." verbose="&apos;buf&apos; is of type &apos;void *&apos;. When using void pointers in calculations, the behaviour is undefined. Arithmetic operations on &apos;void *&apos; is a GNU C extension, which defines the &apos;sizeof(void)&apos; to be 1." cwe="467" file0="sysdep/unix/random.c">
+            <location file="sysdep/unix/random.c" line="92" column="9"/>
+            <symbol>buf</symbol>
+        </error>
+        <error id="nullPointerRedundantCheck" severity="warning" msg="Either the condition &apos;n&apos; is redundant or there is possible null pointer dereference: n." verbose="Either the condition &apos;n&apos; is redundant or there is possible null pointer dereference: n." cwe="476" file0="client/commands.c">
+            <location file="client/commands.c" line="199" column="7" info="Null pointer dereference"/>
+            <location file="client/commands.c" line="195" column="7" info="Assuming that condition &apos;n&apos; is not redundant"/>
+            <symbol>n</symbol>
+        </error>
+        <error id="allocaCalled" severity="warning" msg="Obsolete function &apos;alloca&apos; called. In C99 and later it is recommended to use a variable length array instead." verbose="The obsolete function &apos;alloca&apos; is called. In C99 and later it is recommended to use a variable length array or a dynamically allocated array instead. The function &apos;alloca&apos; is dangerous for many reasons (http://stackoverflow.com/questions/1018853/why-is-alloca-not-considered-good-practice and http://linux.die.net/man/3/alloca)." file0="client/client.c">
+            <location file="client/client.c" line="418" column="13"/>
+            <symbol>alloca</symbol>
+        </error>
+    </errors>
+</results>

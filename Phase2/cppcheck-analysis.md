@@ -166,9 +166,9 @@ reports/cppcheck/cppcheck-final.xml
 |------------------------|------------|---------------:|
 | Baseline analysis (no compilation context) | `cppcheck-result.xml` | **1687** |
 | Context-aware analysis | `context.xml` | **1389** |
-| Context-aware security-focused analysis | `cppcheck-final.xml` | **89** |
+| Context-aware security-focused analysis | `cppcheck-final.xml` | **119** |
 
-The compilation context reduced the number of reported findings from **1687** to **1389** (approximately **17.7% fewer findings**). Restricting the enabled checks to warning, performance, and portability categories further reduced the report to **89 findings**, producing a significantly cleaner output for manual review and later import into SonarQube.
+The compilation context reduced the number of reported findings from **1687** to **1389** (approximately **17.7% fewer findings**). Restricting the enabled checks to warning, performance, and portability categories further reduced the report to **119 findings**, producing a significantly cleaner output for manual review and later import into SonarQube.
 
 ---
 
@@ -176,7 +176,7 @@ The compilation context reduced the number of reported findings from **1687** to
 
 | Severity | Baseline | Context | Final |
 |----------|---------:|--------:|------:|
-| Error | 74 | 53 | 23 |
+| Error | 74 | 53 | 53 |
 | Warning | 57 | 42 | 42 |
 | Portability | 37 | 24 | 24 |
 | Style | 561 | 513 | 0 |
@@ -194,6 +194,7 @@ The compilation context reduced the number of reported findings from **1687** to
 | `uninitvar` | 17 | 17 | 17 |
 | `ignoredReturnValue` | 25 | 18 | 18 |
 | `arithOperationsOnVoidPointer` | 33 | 21 | 21 |
+| `unknownMacro` | 37 | 30 | 30 |
 
 ---
 
@@ -222,7 +223,6 @@ The final security-focused analysis intentionally excludes informational and sty
 - `missingIncludeSystem`
 - `unusedFunction`
 - `variableScope`
-- `unknownMacro`
 - `constParameterPointer`
 - `constVariablePointer`
 - `shadowArgument`
