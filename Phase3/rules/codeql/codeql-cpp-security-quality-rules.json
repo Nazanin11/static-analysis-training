@@ -1,0 +1,3191 @@
+{
+  "tool": "CodeQL",
+  "version": "2.26.1",
+  "language": "C/C++",
+  "query_pack": "codeql/cpp-queries",
+  "query_pack_version": "1.7.0",
+  "query_suite": "cpp-security-and-quality.qls",
+  "total_queries": 182,
+  "queries": [
+    {
+      "id": "cpp/commented-out-code",
+      "name": "Commented-out code",
+      "file": "CommentedOutCode.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Documentation/CommentedOutCode.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "documentation"
+      ],
+      "cwe": [],
+      "description": "Commented-out code makes the remaining code more difficult to read."
+    },
+    {
+      "id": "cpp/fixme-comment",
+      "name": "FIXME comment",
+      "file": "FixmeComments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Documentation/FixmeComments.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "documentation",
+        "external/cwe/cwe-546"
+      ],
+      "cwe": [
+        "CWE-546"
+      ],
+      "description": "Comments containing 'FIXME' indicate that the code has known bugs."
+    },
+    {
+      "id": "cpp/memset-may-be-deleted",
+      "name": "Call to `memset` may be deleted",
+      "file": "MemsetMayBeDeleted.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-014/MemsetMayBeDeleted.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-014"
+      ],
+      "cwe": [
+        "CWE-014"
+      ],
+      "description": "Using the `memset` function to clear private data in a variable that has no subsequent use"
+    },
+    {
+      "id": "cpp/toctou-race-condition",
+      "name": "Time-of-check time-of-use filesystem race condition",
+      "file": "TOCTOUFilesystemRace.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-367/TOCTOUFilesystemRace.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-367"
+      ],
+      "cwe": [
+        "CWE-367"
+      ],
+      "description": "Separately checking the state of a file before operating"
+    },
+    {
+      "id": "cpp/uncontrolled-arithmetic",
+      "name": "Uncontrolled data in arithmetic expression",
+      "file": "ArithmeticUncontrolled.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-190/ArithmeticUncontrolled.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-190",
+        "external/cwe/cwe-191"
+      ],
+      "cwe": [
+        "CWE-190",
+        "CWE-191"
+      ],
+      "description": "Arithmetic operations on uncontrolled data that is not"
+    },
+    {
+      "id": "cpp/comparison-with-wider-type",
+      "name": "Comparison of narrow type with wide type in loop condition",
+      "file": "ComparisonWithWiderType.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-190/ComparisonWithWiderType.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-190",
+        "external/cwe/cwe-197",
+        "external/cwe/cwe-835"
+      ],
+      "cwe": [
+        "CWE-190",
+        "CWE-197",
+        "CWE-835"
+      ],
+      "description": "Comparisons between types of different widths in a loop"
+    },
+    {
+      "id": "cpp/non-https-url",
+      "name": "Failure to use HTTPS URLs",
+      "file": "UseOfHttp.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-319/UseOfHttp.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-319",
+        "external/cwe/cwe-345"
+      ],
+      "cwe": [
+        "CWE-319",
+        "CWE-345"
+      ],
+      "description": "Non-HTTPS connections can be intercepted by third parties."
+    },
+    {
+      "id": "cpp/suspicious-add-sizeof",
+      "name": "Suspicious add with sizeof",
+      "file": "SuspiciousAddWithSizeof.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-468/SuspiciousAddWithSizeof.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-468"
+      ],
+      "cwe": [
+        "CWE-468"
+      ],
+      "description": "Explicitly scaled pointer arithmetic expressions"
+    },
+    {
+      "id": "cpp/command-line-injection",
+      "name": "Uncontrolled data used in OS command",
+      "file": "ExecTainted.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-078/ExecTainted.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-078",
+        "external/cwe/cwe-088"
+      ],
+      "cwe": [
+        "CWE-078",
+        "CWE-088"
+      ],
+      "description": "Using user-supplied data in an OS command, without"
+    },
+    {
+      "id": "cpp/cgi-xss",
+      "name": "CGI script vulnerable to cross-site scripting",
+      "file": "CgiXss.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-079/CgiXss.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-079"
+      ],
+      "cwe": [
+        "CWE-079"
+      ],
+      "description": "Writing user input directly to a web page"
+    },
+    {
+      "id": "cpp/unsafe-dacl-security-descriptor",
+      "name": "Setting a DACL to NULL in a SECURITY_DESCRIPTOR",
+      "file": "UnsafeDaclSecurityDescriptor.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-732/UnsafeDaclSecurityDescriptor.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-732"
+      ],
+      "cwe": [
+        "CWE-732"
+      ],
+      "description": "Setting a DACL to NULL in a SECURITY_DESCRIPTOR will result in an unprotected object."
+    },
+    {
+      "id": "cpp/open-call-with-mode-argument",
+      "name": "File opened with O_CREAT flag but without mode argument",
+      "file": "OpenCallMissingModeArgument.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-732/OpenCallMissingModeArgument.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-732"
+      ],
+      "cwe": [
+        "CWE-732"
+      ],
+      "description": "Opening a file with the O_CREAT flag but without mode argument reads arbitrary bytes from the stack."
+    },
+    {
+      "id": "cpp/insufficient-key-size",
+      "name": "Use of a cryptographic algorithm with insufficient key size",
+      "file": "InsufficientKeySize.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-326/InsufficientKeySize.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-326"
+      ],
+      "cwe": [
+        "CWE-326"
+      ],
+      "description": "Using cryptographic algorithms with too small a key size can"
+    },
+    {
+      "id": "cpp/openssl-heartbleed",
+      "name": "Use of a version of OpenSSL with Heartbleed",
+      "file": "OpenSslHeartbleed.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-327/OpenSslHeartbleed.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "very-high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-327",
+        "external/cwe/cwe-788"
+      ],
+      "cwe": [
+        "CWE-327",
+        "CWE-788"
+      ],
+      "description": "Using an old version of OpenSSL can allow remote"
+    },
+    {
+      "id": "cpp/weak-cryptographic-algorithm",
+      "name": "Use of a broken or risky cryptographic algorithm",
+      "file": "BrokenCryptoAlgorithm.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-327/BrokenCryptoAlgorithm.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-327"
+      ],
+      "cwe": [
+        "CWE-327"
+      ],
+      "description": "Using broken or weak cryptographic algorithms can allow"
+    },
+    {
+      "id": "cpp/cleartext-transmission",
+      "name": "Cleartext transmission of sensitive information",
+      "file": "CleartextTransmission.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-311/CleartextTransmission.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-319",
+        "external/cwe/cwe-359"
+      ],
+      "cwe": [
+        "CWE-319",
+        "CWE-359"
+      ],
+      "description": "Transmitting sensitive information across a network in"
+    },
+    {
+      "id": "cpp/cleartext-storage-file",
+      "name": "Cleartext storage of sensitive information in file",
+      "file": "CleartextFileWrite.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-311/CleartextFileWrite.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-260",
+        "external/cwe/cwe-313"
+      ],
+      "cwe": [
+        "CWE-260",
+        "CWE-313"
+      ],
+      "description": "Storing sensitive information in cleartext can expose it"
+    },
+    {
+      "id": "cpp/external-entity-expansion",
+      "name": "XML external entity expansion",
+      "file": "XXE.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-611/XXE.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-611"
+      ],
+      "cwe": [
+        "CWE-611"
+      ],
+      "description": "Parsing user-controlled XML documents and allowing expansion of"
+    },
+    {
+      "id": "cpp/dangerous-cin",
+      "name": "Dangerous use of 'cin'",
+      "file": "DangerousUseOfCin.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-676/DangerousUseOfCin.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-676"
+      ],
+      "cwe": [
+        "CWE-676"
+      ],
+      "description": "Using `cin` without specifying the length of the input"
+    },
+    {
+      "id": "cpp/dangerous-function-overflow",
+      "name": "Use of dangerous function",
+      "file": "DangerousFunctionOverflow.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-676/DangerousFunctionOverflow.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "very-high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-242",
+        "external/cwe/cwe-676"
+      ],
+      "cwe": [
+        "CWE-242",
+        "CWE-676"
+      ],
+      "description": "Use of a standard library function that does not guard against buffer overflow."
+    },
+    {
+      "id": "cpp/badly-bounded-write",
+      "name": "Badly bounded write",
+      "file": "BadlyBoundedWrite.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-120/BadlyBoundedWrite.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-787",
+        "external/cwe/cwe-805"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-787",
+        "CWE-805"
+      ],
+      "description": "Buffer write operations with a length parameter that"
+    },
+    {
+      "id": "cpp/very-likely-overrunning-write",
+      "name": "Likely overrunning write",
+      "file": "VeryLikelyOverrunWrite.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-120/VeryLikelyOverrunWrite.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-787",
+        "external/cwe/cwe-805"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-787",
+        "CWE-805"
+      ],
+      "description": "Buffer write operations that do not control the length"
+    },
+    {
+      "id": "cpp/hresult-boolean-conversion",
+      "name": "Cast between HRESULT and a Boolean type",
+      "file": "HResultBooleanConversion.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-253/HResultBooleanConversion.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-253"
+      ],
+      "cwe": [
+        "CWE-253"
+      ],
+      "description": "Casting an HRESULT to/from a Boolean type and then using it in a test expression will yield an incorrect result because success (S_OK) in HRESULT is indicated by a value of 0."
+    },
+    {
+      "id": "cpp/tainted-format-string",
+      "name": "Uncontrolled format string",
+      "file": "UncontrolledFormatString.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-134/UncontrolledFormatString.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-134"
+      ],
+      "cwe": [
+        "CWE-134"
+      ],
+      "description": "Using externally-controlled format strings in"
+    },
+    {
+      "id": "cpp/incorrect-string-type-conversion",
+      "name": "Cast from char* to wchar_t*",
+      "file": "WcharCharConversion.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-704/WcharCharConversion.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-704"
+      ],
+      "cwe": [
+        "CWE-704"
+      ],
+      "description": "Casting a byte string to a wide-character string is likely"
+    },
+    {
+      "id": "cpp/unsigned-difference-expression-compared-zero",
+      "name": "Unsigned difference expression compared to zero",
+      "file": "UnsignedDifferenceExpressionComparedZero.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-191/UnsignedDifferenceExpressionComparedZero.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "correctness",
+        "external/cwe/cwe-191"
+      ],
+      "cwe": [
+        "CWE-191"
+      ],
+      "description": "A subtraction with an unsigned result can never be negative. Using such an expression in a relational comparison with `0` is likely to be wrong."
+    },
+    {
+      "id": "cpp/system-data-exposure",
+      "name": "Exposure of system data to an unauthorized control sphere",
+      "file": "ExposedSystemData.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-497/ExposedSystemData.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-497"
+      ],
+      "cwe": [
+        "CWE-497"
+      ],
+      "description": "Exposing system data or debugging information helps"
+    },
+    {
+      "id": "cpp/iterator-to-expired-container",
+      "name": "Iterator to expired container",
+      "file": "IteratorToExpiredContainer.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-416/IteratorToExpiredContainer.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-416",
+        "external/cwe/cwe-664"
+      ],
+      "cwe": [
+        "CWE-416",
+        "CWE-664"
+      ],
+      "description": "Using an iterator owned by a container whose lifetime has expired may lead to unexpected behavior."
+    },
+    {
+      "id": "cpp/use-of-string-after-lifetime-ends",
+      "name": "Use of string after lifetime ends",
+      "file": "UseOfStringAfterLifetimeEnds.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-416/UseOfStringAfterLifetimeEnds.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-416",
+        "external/cwe/cwe-664"
+      ],
+      "cwe": [
+        "CWE-416",
+        "CWE-664"
+      ],
+      "description": "If the value of a call to 'c_str' outlives the underlying object it may lead to unexpected behavior."
+    },
+    {
+      "id": "cpp/use-of-unique-pointer-after-lifetime-ends",
+      "name": "Use of unique pointer after lifetime ends",
+      "file": "UseOfUniquePointerAfterLifetimeEnds.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-416/UseOfUniquePointerAfterLifetimeEnds.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-416",
+        "external/cwe/cwe-664"
+      ],
+      "cwe": [
+        "CWE-416",
+        "CWE-664"
+      ],
+      "description": "Referencing the contents of a unique pointer after the underlying object has expired may lead to unexpected behavior."
+    },
+    {
+      "id": "cpp/no-space-for-terminator",
+      "name": "No space for zero terminator",
+      "file": "NoSpaceForZeroTerminator.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-131/NoSpaceForZeroTerminator.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-131",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-122"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-122",
+        "CWE-131"
+      ],
+      "description": "Allocating a buffer using 'malloc' without ensuring that"
+    },
+    {
+      "id": "cpp/sql-injection",
+      "name": "Uncontrolled data in SQL query",
+      "file": "SqlTainted.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-089/SqlTainted.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "security",
+        "external/cwe/cwe-089"
+      ],
+      "cwe": [
+        "CWE-089"
+      ],
+      "description": "Including user-supplied data in a SQL query without"
+    },
+    {
+      "id": "cpp/irregular-enum-init",
+      "name": "Irregular enum initialization",
+      "file": "AV Rule 145.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.16 Initialization/AV Rule 145.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "In an enumerator list, the = construct should not be used to explicitly initialize members other than the first, unless all items are explicitly initialized. An exception is the pattern to use the last element of an enumerator list to get the number of possible values."
+    },
+    {
+      "id": "cpp/virtual-call-in-constructor",
+      "name": "Virtual call from constructor or destructor",
+      "file": "AV Rule 71.1.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 71.1.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Virtual functions should not be invoked from a constructor or destructor of the same class. Confusingly, virtual functions are resolved statically (not dynamically) in constructors and destructors for the same class. The call should be made explicitly static by qualifying it using the scope resolution operator."
+    },
+    {
+      "id": "cpp/array-in-interface",
+      "name": "No raw arrays in interfaces",
+      "file": "AV Rule 97.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 97.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Arrays should not be used in interfaces. Arrays degenerate to pointers when passed as parameters. This array decay problem has long been known to be a source of errors. Consider using std::vector or encapsulating the array in an Array class."
+    },
+    {
+      "id": "cpp/undisciplined-multiple-inheritance",
+      "name": "Undisciplined multiple inheritance",
+      "file": "AV Rule 88.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 88.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Multiple inheritance should only be used in the following restricted form: n interfaces plus m private implementations, plus at most one protected implementation. Multiple inheritance can lead to complicated inheritance hierarchies that are difficult to comprehend and maintain."
+    },
+    {
+      "id": "cpp/assignment-does-not-return-this",
+      "name": "Overloaded assignment does not return 'this'",
+      "file": "AV Rule 82.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 82.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "An assignment operator should return a reference to *this. Both the standard library types and the built-in types behave in this manner."
+    },
+    {
+      "id": "cpp/redefined-default-parameter",
+      "name": "Redefined default parameter",
+      "file": "AV Rule 95.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 95.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "An inherited default parameter shall never be redefined. Default values are bound statically which is confusing when combined with dynamically bound function calls."
+    },
+    {
+      "id": "cpp/resource-not-released-in-destructor",
+      "name": "Resource not released in destructor",
+      "file": "AV Rule 79.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 79.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "efficiency",
+        "readability",
+        "external/cwe/cwe-404",
+        "external/jsf"
+      ],
+      "cwe": [
+        "CWE-404"
+      ],
+      "description": "All resources acquired by a class should be released by its destructor. Avoid the use of the 'open / close' pattern, since C++ constructors and destructors provide a safer way to handle resource acquisition and release. Best practice in C++ is to use the 'RAII' technique: constructors allocate resources and destructors free them."
+    },
+    {
+      "id": "cpp/inconsistent-virtual-inheritance",
+      "name": "Inconsistent virtual inheritance",
+      "file": "AV Rule 89.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.10 Classes/AV Rule 89.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "A base class shall not be both virtual and non-virtual in the same hierarchy."
+    },
+    {
+      "id": "cpp/missing-header-guard",
+      "name": "Missing header guard",
+      "file": "AV Rule 35.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.07 Header Files/AV Rule 35.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "efficiency",
+        "maintainability",
+        "modularity",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Header files should contain header guards (#defines to prevent"
+    },
+    {
+      "id": "cpp/trivial-switch",
+      "name": "No trivial switch statements",
+      "file": "AV Rule 196.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.24 Control Flow Structures/AV Rule 196.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Using a switch statement when there are fewer than two non-default cases leads to unclear code."
+    },
+    {
+      "id": "cpp/loop-variable-changed",
+      "name": "For loop variable changed in body",
+      "file": "AV Rule 201.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.24 Control Flow Structures/AV Rule 201.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Numeric variables being used within a for loop for iteration counting should not be modified in the body of the loop. Reserve for loops for straightforward iterations, and use a while loop instead for more complex cases."
+    },
+    {
+      "id": "cpp/loop-variable-float",
+      "name": "Avoid floats in for loops",
+      "file": "AV Rule 197.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.24 Control Flow Structures/AV Rule 197.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "correctness",
+        "reliability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Floating point variables should not be used as loop counters. For loops are best suited to simple increments and termination conditions; while loops are preferable for more complex uses."
+    },
+    {
+      "id": "cpp/sizeof-side-effect",
+      "name": "Sizeof with side effects",
+      "file": "AV Rule 166.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.21 Operators/AV Rule 166.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "The sizeof operator should not be used on expressions that contain side effects. It is subtle whether the side effects will occur or not."
+    },
+    {
+      "id": "cpp/missing-return",
+      "name": "Missing return statement",
+      "file": "AV Rule 114.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.13 Functions/AV Rule 114.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "All functions that are not void should return a value on every exit path."
+    },
+    {
+      "id": "cpp/function-in-block",
+      "name": "Function declared in block",
+      "file": "AV Rule 107.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.13 Functions/AV Rule 107.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Functions should always be declared at file scope. It is confusing to declare a function at block scope, and the visibility of the function is not what would be expected."
+    },
+    {
+      "id": "cpp/include-non-header",
+      "name": "Include header files only",
+      "file": "AV Rule 32.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.06 Pre-Processing Directives/AV Rule 32.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "modularity",
+        "readability",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "The #include pre-processor directive should only be used to include header files."
+    },
+    {
+      "id": "cpp/use-of-goto",
+      "name": "Use of goto",
+      "file": "UseOfGoto.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/UseOfGoto.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "The goto statement can make the control flow of a function hard"
+    },
+    {
+      "id": "cpp/complex-block",
+      "name": "Block with too many statements",
+      "file": "BlockWithTooManyStatements.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/BlockWithTooManyStatements.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "testability",
+        "readability",
+        "maintainability"
+      ],
+      "cwe": [],
+      "description": "Blocks with too many consecutive statements are candidates for refactoring. Only complex statements are counted here (eg. for, while, switch ...). The top-level logic will be clearer if each complex statement is extracted to a function."
+    },
+    {
+      "id": "cpp/complex-condition",
+      "name": "Complex condition",
+      "file": "ComplexCondition.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/ComplexCondition.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "testability",
+        "readability",
+        "maintainability",
+        "statistical",
+        "non-attributable"
+      ],
+      "cwe": [],
+      "description": "Boolean expressions that are too deeply nested are hard to read and understand. Consider naming intermediate results as local variables."
+    },
+    {
+      "id": "cpp/guarded-free",
+      "name": "Guarded Free",
+      "file": "GuardedFree.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/GuardedFree.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "NULL-condition guards before function calls to the memory-deallocation"
+    },
+    {
+      "id": "cpp/slicing",
+      "name": "Slicing",
+      "file": "Slicing.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Likely Errors/Slicing.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "types"
+      ],
+      "cwe": [],
+      "description": "Assigning a non-reference instance of a derived type to a variable of the base type slices off all members added by the derived class, and can cause an unexpected state."
+    },
+    {
+      "id": "cpp/empty-block",
+      "name": "Empty branch of conditional",
+      "file": "EmptyBlock.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Likely Errors/EmptyBlock.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "reliability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "An empty block after a conditional can be a sign of an omission"
+    },
+    {
+      "id": "cpp/rethrow-no-exception",
+      "name": "Accidental rethrow",
+      "file": "AccidentalRethrow.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Exceptions/AccidentalRethrow.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "exceptions"
+      ],
+      "cwe": [],
+      "description": "When there is nothing to rethrow, attempting to rethrow an exception will terminate the program."
+    },
+    {
+      "id": "cpp/throwing-pointer",
+      "name": "Throwing pointers",
+      "file": "ThrowingPointers.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Exceptions/ThrowingPointers.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "efficiency",
+        "correctness",
+        "exceptions"
+      ],
+      "cwe": [],
+      "description": "Exceptions should be objects rather than pointers to objects."
+    },
+    {
+      "id": "cpp/catch-missing-free",
+      "name": "Leaky catch",
+      "file": "LeakyCatch.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Exceptions/LeakyCatch.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "efficiency",
+        "correctness",
+        "exceptions",
+        "external/cwe/cwe-401"
+      ],
+      "cwe": [
+        "CWE-401"
+      ],
+      "description": "If an exception is allocated on the heap, then it should be deleted when caught."
+    },
+    {
+      "id": "cpp/catch-by-value",
+      "name": "Catching by value",
+      "file": "CatchingByValue.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Exceptions/CatchingByValue.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "efficiency",
+        "correctness",
+        "exceptions"
+      ],
+      "cwe": [],
+      "description": "Catching an exception by value will create a copy of the thrown exception, thereby potentially slicing the original exception object."
+    },
+    {
+      "id": "cpp/rule-of-two",
+      "name": "Inconsistent definition of copy constructor and assignment ('Rule of Two')",
+      "file": "RuleOfTwo.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/RuleOfTwo.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "Classes that have an explicit copy constructor or copy"
+    },
+    {
+      "id": "cpp/long-switch",
+      "name": "Long switch case",
+      "file": "SwitchLongCase.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/SwitchLongCase.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "A switch statement with too much code in its cases can make the control flow hard to follow. Consider wrapping the code for each case in a function and just using the switch statement to invoke the appropriate function in each case."
+    },
+    {
+      "id": "cpp/short-global-name",
+      "name": "Short global name",
+      "file": "SloppyGlobal.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/SloppyGlobal.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "maintainability"
+      ],
+      "cwe": [],
+      "description": "Global variables should have descriptive names, to help document their use, avoid namespace pollution and reduce the risk of shadowing with local variables."
+    },
+    {
+      "id": "cpp/declaration-hides-variable",
+      "name": "Declaration hides variable",
+      "file": "DeclarationHidesVariable.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Hiding/DeclarationHidesVariable.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "A local variable hides another local variable from a surrounding scope. This may be confusing. Consider renaming one of the variables."
+    },
+    {
+      "id": "cpp/local-variable-hides-global-variable",
+      "name": "Local variable hides global variable",
+      "file": "LocalVariableHidesGlobalVariable.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Hiding/LocalVariableHidesGlobalVariable.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "A local variable or parameter that hides a global variable of the same name. This may be confusing. Consider renaming one of the variables."
+    },
+    {
+      "id": "cpp/declaration-hides-parameter",
+      "name": "Declaration hides parameter",
+      "file": "DeclarationHidesParameter.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Hiding/DeclarationHidesParameter.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "A local variable hides a parameter. This may be confusing. Consider renaming one of them."
+    },
+    {
+      "id": "cpp/unused-local-variable",
+      "name": "Unused local variable",
+      "file": "UnusedLocals.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Unused Entities/UnusedLocals.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "useless-code",
+        "external/cwe/cwe-563"
+      ],
+      "cwe": [
+        "CWE-563"
+      ],
+      "description": "A local variable that is never called or accessed may be an"
+    },
+    {
+      "id": "cpp/unused-static-variable",
+      "name": "Unused static variable",
+      "file": "UnusedStaticVariables.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Unused Entities/UnusedStaticVariables.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "efficiency",
+        "useless-code",
+        "external/cwe/cwe-563"
+      ],
+      "cwe": [
+        "CWE-563"
+      ],
+      "description": "A static variable that is never accessed may be an indication"
+    },
+    {
+      "id": "cpp/unused-static-function",
+      "name": "Unused static function",
+      "file": "UnusedStaticFunctions.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Unused Entities/UnusedStaticFunctions.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "efficiency",
+        "useless-code",
+        "external/cwe/cwe-561"
+      ],
+      "cwe": [
+        "CWE-561"
+      ],
+      "description": "A static function that is never called or accessed may be an"
+    },
+    {
+      "id": "cpp/ambiguously-signed-bit-field",
+      "name": "Ambiguously signed bit-field member",
+      "file": "AmbiguouslySignedBitField.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/AmbiguouslySignedBitField.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features",
+        "external/cwe/cwe-190"
+      ],
+      "cwe": [
+        "CWE-190"
+      ],
+      "description": "Bit fields with integral types should have explicit signedness"
+    },
+    {
+      "id": "cpp/redundant-null-check-simple",
+      "name": "Redundant null check due to previous dereference",
+      "file": "RedundantNullCheckSimple.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/RedundantNullCheckSimple.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-476"
+      ],
+      "cwe": [
+        "CWE-476"
+      ],
+      "description": "Checking a pointer for nullness after dereferencing it is"
+    },
+    {
+      "id": "cpp/unsafe-use-of-this",
+      "name": "Unsafe use of this in constructor",
+      "file": "UnsafeUseOfThis.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/OO/UnsafeUseOfThis.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "very-high",
+      "tags": [
+        "correctness",
+        "language-features",
+        "security",
+        "external/cwe/cwe-670"
+      ],
+      "cwe": [
+        "CWE-670"
+      ],
+      "description": "A call to a pure virtual function using a 'this'"
+    },
+    {
+      "id": "cpp/throw-in-destructor",
+      "name": "Exception thrown in destructor",
+      "file": "ThrowInDestructor.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/OO/ThrowInDestructor.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "Throwing an exception from a destructor may cause immediate"
+    },
+    {
+      "id": "cpp/constructor-delegation",
+      "name": "Incorrect constructor delegation",
+      "file": "IncorrectConstructorDelegation.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/OO/IncorrectConstructorDelegation.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "A constructor in C++ cannot delegate part of the object"
+    },
+    {
+      "id": "cpp/virtual-destructor",
+      "name": "Non-virtual destructor in base class",
+      "file": "NonVirtualDestructorInBaseClass.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/OO/NonVirtualDestructorInBaseClass.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "All base classes with a virtual function should define a virtual destructor. If an application attempts to delete a derived class object through a base class pointer, the result is undefined if the base class destructor is non-virtual."
+    },
+    {
+      "id": "cpp/upcast-array-pointer-arithmetic",
+      "name": "Upcast array used in pointer arithmetic",
+      "file": "CastArrayPointerArithmetic.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Conversion/CastArrayPointerArithmetic.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "correctness",
+        "reliability",
+        "security",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-843"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-843"
+      ],
+      "description": "An array with elements of a derived struct type is cast to a"
+    },
+    {
+      "id": "cpp/implicit-bitfield-downcast",
+      "name": "Implicit downcast from bitfield",
+      "file": "ImplicitDowncastFromBitfield.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Conversion/ImplicitDowncastFromBitfield.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "types"
+      ],
+      "cwe": [],
+      "description": "A bitfield is implicitly downcast to a smaller integer type."
+    },
+    {
+      "id": "cpp/lossy-pointer-cast",
+      "name": "Lossy pointer cast",
+      "file": "LossyPointerCast.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Conversion/LossyPointerCast.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "types"
+      ],
+      "cwe": [],
+      "description": "A pointer type is converted to a smaller integer type. This may"
+    },
+    {
+      "id": "cpp/array-arg-size-mismatch",
+      "name": "Array argument size mismatch",
+      "file": "ArrayArgSizeMismatch.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Conversion/ArrayArgSizeMismatch.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability"
+      ],
+      "cwe": [],
+      "description": "Finds function calls where the size of an array being passed is smaller than the array size of the declared parameter."
+    },
+    {
+      "id": "cpp/return-stack-allocated-memory",
+      "name": "Returning stack-allocated memory",
+      "file": "ReturnStackAllocatedMemory.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/ReturnStackAllocatedMemory.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-825"
+      ],
+      "cwe": [
+        "CWE-825"
+      ],
+      "description": "A function returns a pointer to a stack-allocated region of"
+    },
+    {
+      "id": "cpp/using-expired-stack-address",
+      "name": "Use of expired stack-address",
+      "file": "UsingExpiredStackAddress.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/UsingExpiredStackAddress.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-825"
+      ],
+      "cwe": [
+        "CWE-825"
+      ],
+      "description": "Accessing the stack-allocated memory of a function"
+    },
+    {
+      "id": "cpp/return-c-str-of-std-string",
+      "name": "Return c_str of local std::string",
+      "file": "ReturnCstrOfLocalStdString.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/ReturnCstrOfLocalStdString.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "Returning the c_str of a locally allocated std::string"
+    },
+    {
+      "id": "cpp/unsafe-strncat",
+      "name": "Potentially unsafe call to strncat",
+      "file": "SuspiciousCallToStrncat.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/SuspiciousCallToStrncat.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-788",
+        "external/cwe/cwe-676",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-251"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-251",
+        "CWE-676",
+        "CWE-788"
+      ],
+      "description": "Calling 'strncat' with an incorrect size argument may result in a buffer overflow."
+    },
+    {
+      "id": "cpp/pointer-overflow-check",
+      "name": "Pointer overflow check",
+      "file": "PointerOverflow.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/PointerOverflow.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-758"
+      ],
+      "cwe": [
+        "CWE-758"
+      ],
+      "description": "Adding a value to a pointer to check if it overflows relies"
+    },
+    {
+      "id": "cpp/alloca-in-loop",
+      "name": "Call to alloca in a loop",
+      "file": "AllocaInLoop.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/AllocaInLoop.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-770"
+      ],
+      "cwe": [
+        "CWE-770"
+      ],
+      "description": "Using alloca in a loop can lead to a stack overflow"
+    },
+    {
+      "id": "cpp/useless-expression",
+      "name": "Expression has no effect",
+      "file": "ExprHasNoEffect.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/ExprHasNoEffect.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "correctness",
+        "external/cwe/cwe-561"
+      ],
+      "cwe": [
+        "CWE-561"
+      ],
+      "description": "A pure expression whose value is ignored is likely to be the"
+    },
+    {
+      "id": "cpp/logical-operator-applied-to-flag",
+      "name": "Short-circuiting operator applied to flag",
+      "file": "ShortCircuitBitMask.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/ShortCircuitBitMask.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "external/cwe/cwe-480"
+      ],
+      "cwe": [
+        "CWE-480"
+      ],
+      "description": "A short-circuiting logical operator is applied to what looks like a flag."
+    },
+    {
+      "id": "cpp/dubious-null-check",
+      "name": "Dubious NULL check",
+      "file": "DubiousNullCheck.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/DubiousNullCheck.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "reliability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "The address of a field (except the first) will never be NULL,"
+    },
+    {
+      "id": "cpp/compare-where-assign-meant",
+      "name": "Comparison where assignment was intended",
+      "file": "CompareWhereAssignMeant.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/CompareWhereAssignMeant.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "external/cwe/cwe-482"
+      ],
+      "cwe": [
+        "CWE-482"
+      ],
+      "description": "The '==' operator may have been used accidentally, where '='"
+    },
+    {
+      "id": "cpp/string-copy-return-value-as-boolean",
+      "name": "Use of string copy function in a condition",
+      "file": "UsingStrcpyAsBoolean.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/UsingStrcpyAsBoolean.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "The return value for strcpy, strncpy, or related string copy"
+    },
+    {
+      "id": "cpp/inconsistent-loop-direction",
+      "name": "Inconsistent direction of for loop",
+      "file": "inconsistentLoopDirection.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/inconsistentLoopDirection.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "correctness",
+        "external/cwe/cwe-835"
+      ],
+      "cwe": [
+        "CWE-835"
+      ],
+      "description": "A for-loop iteration expression goes backward with respect of the initialization statement and condition expression."
+    },
+    {
+      "id": "cpp/empty-if",
+      "name": "Futile conditional",
+      "file": "FutileConditional.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/FutileConditional.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "An if-statement with an empty then-branch and no else-branch"
+    },
+    {
+      "id": "cpp/assign-where-compare-meant",
+      "name": "Assignment where comparison was intended",
+      "file": "AssignWhereCompareMeant.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/AssignWhereCompareMeant.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "external/cwe/cwe-481"
+      ],
+      "cwe": [
+        "CWE-481"
+      ],
+      "description": "The '=' operator may have been used accidentally, where '=='"
+    },
+    {
+      "id": "cpp/constant-comparison",
+      "name": "Comparison result is always the same",
+      "file": "PointlessComparison.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/PointlessComparison.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "When a comparison operation, such as x < y, always"
+    },
+    {
+      "id": "cpp/bad-addition-overflow-check",
+      "name": "Bad check for overflow of integer addition",
+      "file": "BadAdditionOverflowCheck.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/BadAdditionOverflowCheck.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "very-high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-190",
+        "external/cwe/cwe-192"
+      ],
+      "cwe": [
+        "CWE-190",
+        "CWE-192"
+      ],
+      "description": "Checking for overflow of integer addition by comparing"
+    },
+    {
+      "id": "cpp/comparison-precedence",
+      "name": "Unclear comparison precedence",
+      "file": "ComparisonPrecedence.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/ComparisonPrecedence.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "Using comparisons as operands of other comparisons is unusual"
+    },
+    {
+      "id": "cpp/integer-multiplication-cast-to-long",
+      "name": "Multiplication result converted to larger type",
+      "file": "IntMultToLong.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/IntMultToLong.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "correctness",
+        "types",
+        "external/cwe/cwe-190",
+        "external/cwe/cwe-192",
+        "external/cwe/cwe-197",
+        "external/cwe/cwe-681"
+      ],
+      "cwe": [
+        "CWE-190",
+        "CWE-192",
+        "CWE-197",
+        "CWE-681"
+      ],
+      "description": "A multiplication result that is converted to a larger type can"
+    },
+    {
+      "id": "cpp/bitwise-sign-check",
+      "name": "Sign check of bitwise operation",
+      "file": "BitwiseSignCheck.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/BitwiseSignCheck.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "Checking the sign of the result of a bitwise operation may yield unexpected results."
+    },
+    {
+      "id": "cpp/unsigned-comparison-zero",
+      "name": "Unsigned comparison to zero",
+      "file": "UnsignedGEZero.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/UnsignedGEZero.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability"
+      ],
+      "cwe": [],
+      "description": "An unsigned value is always non-negative, even if it has been"
+    },
+    {
+      "id": "cpp/equality-on-floats",
+      "name": "Equality test on floating-point values",
+      "file": "FloatComparison.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/FloatComparison.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "Comparing results of floating-point computations with '==' or"
+    },
+    {
+      "id": "cpp/signed-overflow-check",
+      "name": "Signed overflow check",
+      "file": "SignedOverflowCheck.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/SignedOverflowCheck.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "correctness",
+        "security",
+        "external/cwe/cwe-128",
+        "external/cwe/cwe-190"
+      ],
+      "cwe": [
+        "CWE-128",
+        "CWE-190"
+      ],
+      "description": "Testing for overflow by adding a value to a variable"
+    },
+    {
+      "id": "cpp/comparison-of-identical-expressions",
+      "name": "Self comparison",
+      "file": "PointlessSelfComparison.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/PointlessSelfComparison.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "readability",
+        "maintainability"
+      ],
+      "cwe": [],
+      "description": "Comparing a variable to itself always produces the"
+    },
+    {
+      "id": "cpp/wrong-type-format-argument",
+      "name": "Wrong type of arguments to formatting function",
+      "file": "WrongTypeFormatArguments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Format/WrongTypeFormatArguments.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-686"
+      ],
+      "cwe": [
+        "CWE-686"
+      ],
+      "description": "Calling a printf-like function with the wrong type of arguments causes unpredictable"
+    },
+    {
+      "id": "cpp/overflowing-snprintf",
+      "name": "Potentially overflowing call to snprintf",
+      "file": "SnprintfOverflow.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Format/SnprintfOverflow.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-190",
+        "external/cwe/cwe-253"
+      ],
+      "cwe": [
+        "CWE-190",
+        "CWE-253"
+      ],
+      "description": "Using the return value from snprintf without proper checks can cause overflow."
+    },
+    {
+      "id": "cpp/non-constant-format",
+      "name": "Non-constant format string",
+      "file": "NonConstantFormat.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Format/NonConstantFormat.ql",
+      "kind": "path-problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-134"
+      ],
+      "cwe": [
+        "CWE-134"
+      ],
+      "description": "Passing a value that is not a string literal 'format' string to a printf-like function can lead"
+    },
+    {
+      "id": "cpp/too-many-format-arguments",
+      "name": "Too many arguments to formatting function",
+      "file": "TooManyFormatArguments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Format/TooManyFormatArguments.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "A printf-like function called with too many arguments will"
+    },
+    {
+      "id": "cpp/wrong-number-format-arguments",
+      "name": "Too few arguments to formatting function",
+      "file": "WrongNumberOfFormatArguments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Format/WrongNumberOfFormatArguments.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-234",
+        "external/cwe/cwe-685"
+      ],
+      "cwe": [
+        "CWE-234",
+        "CWE-685"
+      ],
+      "description": "Calling a printf-like function with too few arguments can be"
+    },
+    {
+      "id": "cpp/too-few-arguments",
+      "name": "Call to function with fewer arguments than declared parameters",
+      "file": "TooFewArguments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Underspecified Functions/TooFewArguments.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "very-high",
+      "tags": [
+        "correctness",
+        "maintainability",
+        "security",
+        "external/cwe/cwe-234",
+        "external/cwe/cwe-685"
+      ],
+      "cwe": [
+        "CWE-234",
+        "CWE-685"
+      ],
+      "description": "A function call is passing fewer arguments than the number of"
+    },
+    {
+      "id": "cpp/implicit-function-declaration",
+      "name": "Implicit function declaration",
+      "file": "ImplicitFunctionDeclaration.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Underspecified Functions/ImplicitFunctionDeclaration.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "correctness",
+        "maintainability"
+      ],
+      "cwe": [],
+      "description": "An implicitly declared function is assumed to take no"
+    },
+    {
+      "id": "cpp/futile-params",
+      "name": "Call to function with extraneous arguments",
+      "file": "TooManyArguments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Underspecified Functions/TooManyArguments.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "correctness",
+        "maintainability"
+      ],
+      "cwe": [],
+      "description": "A function call to a function passed more arguments than there are"
+    },
+    {
+      "id": "cpp/non-member-const-no-effect",
+      "name": "Constant return type",
+      "file": "ReturnConstType.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/ReturnConstType.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "A 'const' modifier on a function return type is useless and should be removed for clarity."
+    },
+    {
+      "id": "cpp/member-const-no-effect",
+      "name": "Constant return type on member",
+      "file": "ReturnConstTypeMember.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/ReturnConstTypeMember.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "very-high",
+      "tags": [
+        "maintainability",
+        "readability",
+        "language-features"
+      ],
+      "cwe": [],
+      "description": "A 'const' modifier on a member function return type is useless. It is usually a typo or misunderstanding, since the syntax for a 'const' function is 'int foo() const', not 'const int foo()'."
+    },
+    {
+      "id": "cpp/continue-in-false-loop",
+      "name": "Continue statement that does not continue",
+      "file": "ContinueInFalseLoop.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/ContinueInFalseLoop.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "A 'continue' statement only re-runs the loop if the loop-condition is true. Therefore"
+    },
+    {
+      "id": "cpp/use-in-own-initializer",
+      "name": "Variable used in its own initializer",
+      "file": "UseInOwnInitializer.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/UseInOwnInitializer.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "Loading from a variable in its own initializer may lead to undefined behavior."
+    },
+    {
+      "id": "cpp/duplicate-include-guard",
+      "name": "Duplicate include guard",
+      "file": "Cleanup-DuplicateIncludeGuard.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Header Cleanup/Cleanup-DuplicateIncludeGuard.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "maintainability",
+        "modularity"
+      ],
+      "cwe": [],
+      "description": "Using the same include guard macro in more than one header file may cause unexpected behavior from the compiler."
+    },
+    {
+      "id": "cpp/new-array-delete-mismatch",
+      "name": "'new[]' array freed with 'delete'",
+      "file": "NewArrayDeleteMismatch.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/NewArrayDeleteMismatch.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability"
+      ],
+      "cwe": [],
+      "description": "An array allocated with 'new[]' is being freed using 'delete'. Behavior in such cases is undefined and should be avoided. Use 'delete[]' when freeing arrays allocated with 'new[]'."
+    },
+    {
+      "id": "cpp/new-delete-array-mismatch",
+      "name": "'new' object freed with 'delete[]'",
+      "file": "NewDeleteArrayMismatch.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/NewDeleteArrayMismatch.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability"
+      ],
+      "cwe": [],
+      "description": "An object that was allocated with 'new' is being freed using 'delete[]'. Behavior in such cases is undefined and should be avoided. Use 'delete' instead."
+    },
+    {
+      "id": "cpp/incorrectly-checked-scanf",
+      "name": "Incorrect return-value check for a 'scanf'-like function",
+      "file": "IncorrectCheckScanf.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/IncorrectCheckScanf.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "security",
+        "correctness",
+        "external/cwe/cwe-253"
+      ],
+      "cwe": [
+        "CWE-253"
+      ],
+      "description": "Failing to account for EOF in a call to a scanf-like function can lead to"
+    },
+    {
+      "id": "cpp/new-free-mismatch",
+      "name": "Mismatching new/free or malloc/delete",
+      "file": "NewFreeMismatch.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/NewFreeMismatch.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-401"
+      ],
+      "cwe": [
+        "CWE-401"
+      ],
+      "description": "An object that was allocated with 'malloc' or 'new' is being freed using a mismatching 'free' or 'delete'."
+    },
+    {
+      "id": "cpp/double-free",
+      "name": "Potential double free",
+      "file": "DoubleFree.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/DoubleFree.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-415"
+      ],
+      "cwe": [
+        "CWE-415"
+      ],
+      "description": "Freeing a resource more than once can lead to undefined behavior and cause memory corruption."
+    },
+    {
+      "id": "cpp/use-after-free",
+      "name": "Potential use after free",
+      "file": "UseAfterFree.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/UseAfterFree.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-416"
+      ],
+      "cwe": [
+        "CWE-416"
+      ],
+      "description": "An allocated memory block is used after it has been freed. Behavior in such cases is undefined and can cause memory corruption."
+    },
+    {
+      "id": "cpp/large-parameter",
+      "name": "Large object passed by value",
+      "file": "LargeParameter.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/LargeParameter.ql",
+      "kind": "problem",
+      "severity": "recommendation",
+      "precision": "very-high",
+      "tags": [
+        "efficiency",
+        "readability",
+        "statistical",
+        "non-attributable"
+      ],
+      "cwe": [],
+      "description": "An object larger than 64 bytes is passed by value to a function. Passing large objects by value unnecessarily use up scarce stack space, increase the cost of calling a function and can be a security risk. Use a const pointer to the object instead."
+    },
+    {
+      "id": "cpp/static-buffer-overflow",
+      "name": "Static array access may cause overflow",
+      "file": "OverflowStatic.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/OverflowStatic.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-131"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-131"
+      ],
+      "description": "Exceeding the size of a static array during write or access operations"
+    },
+    {
+      "id": "cpp/dead-code-goto",
+      "name": "Dead code due to goto or break statement",
+      "file": "DeadCodeGoto.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/DeadCodeGoto.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "high",
+      "tags": [
+        "maintainability",
+        "external/cwe/cwe-561"
+      ],
+      "cwe": [
+        "CWE-561"
+      ],
+      "description": "A goto or break statement is followed by unreachable code."
+    },
+    {
+      "id": "cpp/poorly-documented-function",
+      "name": "Poorly documented large function",
+      "file": "UncommentedFunction.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Documentation/UncommentedFunction.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "maintainability",
+        "documentation",
+        "statistical",
+        "non-attributable"
+      ],
+      "cwe": [],
+      "description": "Large functions that have no or almost no comments are likely to be too complex to understand and maintain. The larger a function is, the more problematic the lack of comments."
+    },
+    {
+      "id": "cpp/overflow-buffer",
+      "name": "Call to memory access function may overflow buffer",
+      "file": "OverflowBuffer.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-119/OverflowBuffer.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-121",
+        "external/cwe/cwe-122",
+        "external/cwe/cwe-126"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-121",
+        "CWE-122",
+        "CWE-126"
+      ],
+      "description": "Incorrect use of a function that accesses a memory"
+    },
+    {
+      "id": "cpp/overrun-write",
+      "name": "Overrunning write",
+      "file": "OverrunWriteProductFlow.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-119/OverrunWriteProductFlow.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-131"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-131"
+      ],
+      "description": "Exceeding the size of a static array during write or access operations"
+    },
+    {
+      "id": "cpp/uncontrolled-allocation-size",
+      "name": "Uncontrolled allocation size",
+      "file": "TaintedAllocationSize.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-190/TaintedAllocationSize.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-190",
+        "external/cwe/cwe-789"
+      ],
+      "cwe": [
+        "CWE-190",
+        "CWE-789"
+      ],
+      "description": "Allocating memory with a size controlled by an external user can result in"
+    },
+    {
+      "id": "cpp/suspicious-pointer-scaling",
+      "name": "Suspicious pointer scaling",
+      "file": "IncorrectPointerScaling.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-468/IncorrectPointerScaling.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-468"
+      ],
+      "cwe": [
+        "CWE-468"
+      ],
+      "description": "Implicit scaling of pointer arithmetic expressions"
+    },
+    {
+      "id": "cpp/suspicious-pointer-scaling-void",
+      "name": "Suspicious pointer scaling to void",
+      "file": "IncorrectPointerScalingVoid.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-468/IncorrectPointerScalingVoid.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-468"
+      ],
+      "cwe": [
+        "CWE-468"
+      ],
+      "description": "Implicit scaling of pointer arithmetic expressions"
+    },
+    {
+      "id": "cpp/certificate-not-checked",
+      "name": "Certificate not checked",
+      "file": "SSLResultNotChecked.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-295/SSLResultNotChecked.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-295"
+      ],
+      "cwe": [
+        "CWE-295"
+      ],
+      "description": "Always check the result of certificate verification after fetching an SSL certificate."
+    },
+    {
+      "id": "cpp/certificate-result-conflation",
+      "name": "Certificate result conflation",
+      "file": "SSLResultConflation.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-295/SSLResultConflation.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-295"
+      ],
+      "cwe": [
+        "CWE-295"
+      ],
+      "description": "Only accept SSL certificates that pass certificate verification."
+    },
+    {
+      "id": "cpp/invalid-pointer-deref",
+      "name": "Invalid pointer dereference",
+      "file": "InvalidPointerDeref.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-193/InvalidPointerDeref.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-125",
+        "external/cwe/cwe-193",
+        "external/cwe/cwe-787"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-125",
+        "CWE-193",
+        "CWE-787"
+      ],
+      "description": "Dereferencing an out-of-bounds pointer is undefined behavior and may lead to security vulnerabilities."
+    },
+    {
+      "id": "cpp/world-writable-file-creation",
+      "name": "File created without restricting permissions",
+      "file": "DoNotCreateWorldWritable.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-732/DoNotCreateWorldWritable.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-732"
+      ],
+      "cwe": [
+        "CWE-732"
+      ],
+      "description": "Creating a file that is world-writable can allow an attacker to write to the file."
+    },
+    {
+      "id": "cpp/cleartext-storage-buffer",
+      "name": "Cleartext storage of sensitive information in buffer",
+      "file": "CleartextBufferWrite.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-311/CleartextBufferWrite.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-312"
+      ],
+      "cwe": [
+        "CWE-312"
+      ],
+      "description": "Storing sensitive information in cleartext can expose it"
+    },
+    {
+      "id": "cpp/path-injection",
+      "name": "Uncontrolled data used in path expression",
+      "file": "TaintedPath.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-022/TaintedPath.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-022",
+        "external/cwe/cwe-023",
+        "external/cwe/cwe-036",
+        "external/cwe/cwe-073"
+      ],
+      "cwe": [
+        "CWE-022",
+        "CWE-023",
+        "CWE-036",
+        "CWE-073"
+      ],
+      "description": "Accessing paths influenced by users can allow an"
+    },
+    {
+      "id": "cpp/uncontrolled-process-operation",
+      "name": "Uncontrolled process operation",
+      "file": "UncontrolledProcessOperation.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-114/UncontrolledProcessOperation.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-073",
+        "external/cwe/cwe-078",
+        "external/cwe/cwe-114"
+      ],
+      "cwe": [
+        "CWE-073",
+        "CWE-078",
+        "CWE-114"
+      ],
+      "description": "Using externally controlled strings in a process"
+    },
+    {
+      "id": "cpp/potentially-dangerous-function",
+      "name": "Use of potentially dangerous function",
+      "file": "PotentiallyDangerousFunction.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-676/PotentiallyDangerousFunction.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-676"
+      ],
+      "cwe": [
+        "CWE-676"
+      ],
+      "description": "Use of a standard library function that is not thread-safe."
+    },
+    {
+      "id": "cpp/type-confusion",
+      "name": "Type confusion",
+      "file": "TypeConfusion.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-843/TypeConfusion.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-843"
+      ],
+      "cwe": [
+        "CWE-843"
+      ],
+      "description": "Casting a value to an incompatible type can lead to undefined behavior."
+    },
+    {
+      "id": "cpp/user-controlled-bypass",
+      "name": "Authentication bypass by spoofing",
+      "file": "AuthenticationBypass.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-290/AuthenticationBypass.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-290"
+      ],
+      "cwe": [
+        "CWE-290"
+      ],
+      "description": "Authentication by checking that the peer's address"
+    },
+    {
+      "id": "cpp/unbounded-write",
+      "name": "Unbounded write",
+      "file": "UnboundedWrite.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-120/UnboundedWrite.ql",
+      "kind": "path-problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-787",
+        "external/cwe/cwe-805"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-787",
+        "CWE-805"
+      ],
+      "description": "Buffer write operations that do not control the length"
+    },
+    {
+      "id": "cpp/overrunning-write",
+      "name": "Potentially overrunning write",
+      "file": "OverrunWrite.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-120/OverrunWrite.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-787",
+        "external/cwe/cwe-805"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-787",
+        "CWE-805"
+      ],
+      "description": "Buffer write operations that do not control the length"
+    },
+    {
+      "id": "cpp/overrunning-write-with-float",
+      "name": "Potentially overrunning write with float to string conversion",
+      "file": "OverrunWriteFloat.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-120/OverrunWriteFloat.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-787",
+        "external/cwe/cwe-805"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-787",
+        "CWE-805"
+      ],
+      "description": "Buffer write operations that do not control the length"
+    },
+    {
+      "id": "cpp/cleartext-storage-database",
+      "name": "Cleartext storage of sensitive information in an SQLite database",
+      "file": "CleartextSqliteDatabase.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-313/CleartextSqliteDatabase.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-313"
+      ],
+      "cwe": [
+        "CWE-313"
+      ],
+      "description": "Storing sensitive information in a non-encrypted"
+    },
+    {
+      "id": "cpp/tainted-permissions-check",
+      "name": "Untrusted input for a condition",
+      "file": "TaintedCondition.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-807/TaintedCondition.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-807"
+      ],
+      "cwe": [
+        "CWE-807"
+      ],
+      "description": "Using untrusted inputs in a statement that makes a"
+    },
+    {
+      "id": "cpp/potential-system-data-exposure",
+      "name": "Potential exposure of sensitive system data to an unauthorized control sphere",
+      "file": "PotentiallyExposedSystemData.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-497/PotentiallyExposedSystemData.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-497"
+      ],
+      "cwe": [
+        "CWE-497"
+      ],
+      "description": "Exposing sensitive system data helps"
+    },
+    {
+      "id": "cpp/incorrect-allocation-error-handling",
+      "name": "Incorrect allocation-error handling",
+      "file": "IncorrectAllocationErrorHandling.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-570/IncorrectAllocationErrorHandling.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "correctness",
+        "security",
+        "external/cwe/cwe-570",
+        "external/cwe/cwe-252",
+        "external/cwe/cwe-755"
+      ],
+      "cwe": [
+        "CWE-252",
+        "CWE-570",
+        "CWE-755"
+      ],
+      "description": "Mixing up the failure conditions of 'operator new' and 'operator new(std::nothrow)' can result in unexpected behavior."
+    },
+    {
+      "id": "cpp/unsafe-create-process-call",
+      "name": "NULL application name with an unquoted path in call to CreateProcess",
+      "file": "UnsafeCreateProcessCall.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-428/UnsafeCreateProcessCall.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-428"
+      ],
+      "cwe": [
+        "CWE-428"
+      ],
+      "description": "Calling a function of the CreateProcess* family of functions, where the path contains spaces, introduces a security vulnerability."
+    },
+    {
+      "id": "cpp/unterminated-variadic-call",
+      "name": "Unterminated variadic call",
+      "file": "UnterminatedVarargsCall.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Security/CWE/CWE-121/UnterminatedVarargsCall.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-121"
+      ],
+      "cwe": [
+        "CWE-121"
+      ],
+      "description": "Calling a variadic function without a sentinel value"
+    },
+    {
+      "id": "cpp/integer-used-for-enum",
+      "name": "Use of integer where enum is preferred",
+      "file": "AV Rule 148.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/jsf/4.17 Types/AV Rule 148.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "maintainability",
+        "readability",
+        "language-features",
+        "external/jsf"
+      ],
+      "cwe": [],
+      "description": "Enumeration types should be used instead of integer types (and constants) to select from a limited series of choices."
+    },
+    {
+      "id": "cpp/offset-use-before-range-check",
+      "name": "Array offset used before range check",
+      "file": "OffsetUseBeforeRangeCheck.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Likely Errors/OffsetUseBeforeRangeCheck.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-125"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-125"
+      ],
+      "description": "Accessing an array offset before checking the range means that"
+    },
+    {
+      "id": "cpp/comma-before-misleading-indentation",
+      "name": "Comma before misleading indentation",
+      "file": "CommaBeforeMisleadingIndentation.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Best Practices/Likely Errors/CommaBeforeMisleadingIndentation.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "maintainability",
+        "readability",
+        "security",
+        "external/cwe/cwe-1078",
+        "external/cwe/cwe-670"
+      ],
+      "cwe": [
+        "CWE-1078",
+        "CWE-670"
+      ],
+      "description": "If expressions before and after a comma operator use different indentation, it is easy to misread the purpose of the code."
+    },
+    {
+      "id": "cpp/inconsistent-call-on-result",
+      "name": "Inconsistent operation on return value",
+      "file": "InconsistentCallOnResult.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/InconsistentCallOnResult.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "statistical",
+        "non-attributable",
+        "external/cwe/cwe-252"
+      ],
+      "cwe": [
+        "CWE-252"
+      ],
+      "description": "A function is called, and the same operation is usually performed on the return value - for example, free, delete, close etc. However, in some cases it is not performed. These unusual cases may indicate misuse of the API and could cause resource leaks."
+    },
+    {
+      "id": "cpp/lossy-function-result-cast",
+      "name": "Lossy function result cast",
+      "file": "LossyFunctionResultCast.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Conversion/LossyFunctionResultCast.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "Finds function calls whose result type is a floating point type, and which are casted to an integral type."
+    },
+    {
+      "id": "cpp/suspicious-sizeof",
+      "name": "Suspicious 'sizeof' use",
+      "file": "SuspiciousSizeof.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/SuspiciousSizeof.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-467"
+      ],
+      "cwe": [
+        "CWE-467"
+      ],
+      "description": "Taking 'sizeof' of an array parameter is often mistakenly thought"
+    },
+    {
+      "id": "cpp/stack-address-escape",
+      "name": "Local variable address stored in non-local memory",
+      "file": "StackAddressEscapes.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/StackAddressEscapes.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability"
+      ],
+      "cwe": [],
+      "description": "Storing the address of a local variable in non-local"
+    },
+    {
+      "id": "cpp/bad-strncpy-size",
+      "name": "Possibly wrong buffer size in string copy",
+      "file": "StrncpyFlippedArgs.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/StrncpyFlippedArgs.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-676",
+        "external/cwe/cwe-119",
+        "external/cwe/cwe-251"
+      ],
+      "cwe": [
+        "CWE-119",
+        "CWE-251",
+        "CWE-676"
+      ],
+      "description": "Calling 'strncpy' with the size of the source buffer"
+    },
+    {
+      "id": "cpp/uninitialized-local",
+      "name": "Potentially uninitialized local variable",
+      "file": "UninitializedLocal.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/UninitializedLocal.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-665",
+        "external/cwe/cwe-457"
+      ],
+      "cwe": [
+        "CWE-457",
+        "CWE-665"
+      ],
+      "description": "Reading from a local variable that has not been assigned to"
+    },
+    {
+      "id": "cpp/unsafe-strcat",
+      "name": "Potentially unsafe use of strcat",
+      "file": "UnsafeUseOfStrcat.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Memory Management/UnsafeUseOfStrcat.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "security",
+        "external/cwe/cwe-676",
+        "external/cwe/cwe-120",
+        "external/cwe/cwe-251"
+      ],
+      "cwe": [
+        "CWE-120",
+        "CWE-251",
+        "CWE-676"
+      ],
+      "description": "Using 'strcat' without checking the size of the source string"
+    },
+    {
+      "id": "cpp/inconsistent-null-check",
+      "name": "Inconsistent nullness check",
+      "file": "InconsistentCheckReturnNull.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/InconsistentCheckReturnNull.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "statistical",
+        "non-attributable",
+        "external/cwe/cwe-476"
+      ],
+      "cwe": [
+        "CWE-476"
+      ],
+      "description": "The result value of a function is often checked for nullness,"
+    },
+    {
+      "id": "cpp/missing-case-in-switch",
+      "name": "Missing enum case in switch",
+      "file": "MissingEnumCaseInSwitch.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/MissingEnumCaseInSwitch.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "external/cwe/cwe-478"
+      ],
+      "cwe": [
+        "CWE-478"
+      ],
+      "description": "A switch statement over an enum type is missing a case for some enum constant"
+    },
+    {
+      "id": "cpp/incorrect-not-operator-usage",
+      "name": "Incorrect 'not' operator usage",
+      "file": "IncorrectNotOperatorUsage.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Likely Typos/IncorrectNotOperatorUsage.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-480"
+      ],
+      "cwe": [
+        "CWE-480"
+      ],
+      "description": "Usage of a logical-not (!) operator as an operand for a bit-wise operation."
+    },
+    {
+      "id": "cpp/incomplete-parity-check",
+      "name": "Bad check for oddness",
+      "file": "BadCheckOdd.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Arithmetic/BadCheckOdd.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "correctness",
+        "types"
+      ],
+      "cwe": [],
+      "description": "Using \"x % 2 == 1\" to check whether x is odd does not work for"
+    },
+    {
+      "id": "cpp/nested-loops-with-same-variable",
+      "name": "Nested loops with same variable",
+      "file": "NestedLoopSameVar.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/NestedLoopSameVar.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "maintainability",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "When a nested loop uses the same iteration variable as its outer loop, the"
+    },
+    {
+      "id": "cpp/mistyped-function-arguments",
+      "name": "Call to a function with one or more incompatible arguments",
+      "file": "MistypedFunctionArguments.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Underspecified Functions/MistypedFunctionArguments.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "correctness",
+        "maintainability"
+      ],
+      "cwe": [],
+      "description": "When the type of a function argument is not compatible"
+    },
+    {
+      "id": "cpp/boost/tls-settings-misconfiguration",
+      "name": "boost::asio TLS settings misconfiguration",
+      "file": "TlsSettingsMisconfiguration.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Protocols/TlsSettingsMisconfiguration.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-326"
+      ],
+      "cwe": [
+        "CWE-326"
+      ],
+      "description": "Using the TLS or SSLv23 protocol from the boost::asio library, but not disabling deprecated protocols, or disabling minimum-recommended protocols."
+    },
+    {
+      "id": "cpp/boost/use-of-deprecated-hardcoded-security-protocol",
+      "name": "boost::asio use of deprecated hardcoded protocol",
+      "file": "UseOfDeprecatedHardcodedProtocol.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Protocols/UseOfDeprecatedHardcodedProtocol.ql",
+      "kind": "problem",
+      "severity": "error",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "external/cwe/cwe-327"
+      ],
+      "cwe": [
+        "CWE-327"
+      ],
+      "description": "Using a deprecated hard-coded protocol using the boost::asio library."
+    },
+    {
+      "id": "cpp/leap-year/adding-365-days-per-year",
+      "name": "Arithmetic operation assumes 365 days per year",
+      "file": "Adding365DaysPerYear.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Leap Year/Adding365DaysPerYear.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "leap-year",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "When an arithmetic operation modifies a date by a constant"
+    },
+    {
+      "id": "cpp/leap-year/unchecked-return-value-for-time-conversion-function",
+      "name": "Unchecked return value for time conversion function",
+      "file": "UncheckedReturnValueForTimeFunctions.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Leap Year/UncheckedReturnValueForTimeFunctions.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "leap-year",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "When the return value of a fallible time conversion function is"
+    },
+    {
+      "id": "cpp/leap-year/unchecked-after-arithmetic-year-modification",
+      "name": "Year field changed using an arithmetic operation without checking for leap year",
+      "file": "UncheckedLeapYearAfterYearModification.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Likely Bugs/Leap Year/UncheckedLeapYearAfterYearModification.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "leap-year",
+        "correctness"
+      ],
+      "cwe": [],
+      "description": "A field that represents a year is being modified by an arithmetic operation, but no proper check for leap years can be detected afterwards."
+    },
+    {
+      "id": "cpp/missing-check-scanf",
+      "name": "Missing return-value check for a 'scanf'-like function",
+      "file": "MissingCheckScanf.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/MissingCheckScanf.ql",
+      "kind": "path-problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "security",
+        "correctness",
+        "external/cwe/cwe-252",
+        "external/cwe/cwe-253"
+      ],
+      "cwe": [
+        "CWE-252",
+        "CWE-253"
+      ],
+      "description": "Failing to check that a call to 'scanf' actually writes to an"
+    },
+    {
+      "id": "cpp/allocation-too-small",
+      "name": "Not enough memory allocated for pointer type",
+      "file": "SizeCheck.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/SizeCheck.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-131",
+        "external/cwe/cwe-122"
+      ],
+      "cwe": [
+        "CWE-122",
+        "CWE-131"
+      ],
+      "description": "Calling 'malloc', 'calloc' or 'realloc' without allocating enough memory to contain"
+    },
+    {
+      "id": "cpp/suspicious-allocation-size",
+      "name": "Not enough memory allocated for array of pointer type",
+      "file": "SizeCheck2.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Critical/SizeCheck2.ql",
+      "kind": "problem",
+      "severity": "warning",
+      "precision": "medium",
+      "tags": [
+        "reliability",
+        "security",
+        "external/cwe/cwe-131",
+        "external/cwe/cwe-122"
+      ],
+      "cwe": [
+        "CWE-122",
+        "CWE-131"
+      ],
+      "description": "Calling 'malloc', 'calloc' or 'realloc' without allocating enough memory to contain"
+    },
+    {
+      "id": "cpp/diagnostics/failed-extractor-invocations",
+      "name": "Failed extractor invocations",
+      "file": "FailedExtractorInvocations.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Diagnostics/FailedExtractorInvocations.ql",
+      "kind": "diagnostic",
+      "severity": null,
+      "precision": null,
+      "tags": [],
+      "cwe": [],
+      "description": "Gives the command line of compilations for which extraction did not run to completion."
+    },
+    {
+      "id": "cpp/diagnostics/successfully-extracted-files",
+      "name": "Extracted files",
+      "file": "ExtractedFiles.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Diagnostics/ExtractedFiles.ql",
+      "kind": "diagnostic",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "successfully-extracted-files"
+      ],
+      "cwe": [],
+      "description": "Lists all files in the source code directory that were extracted."
+    },
+    {
+      "id": "cpp/diagnostics/extraction-warnings",
+      "name": "Extraction warnings",
+      "file": "ExtractionWarnings.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Diagnostics/ExtractionWarnings.ql",
+      "kind": "diagnostic",
+      "severity": null,
+      "precision": null,
+      "tags": [],
+      "cwe": [],
+      "description": "List all extraction warnings for files in the source code directory."
+    },
+    {
+      "id": "cpp/telemetry/succeeded-includes",
+      "name": "Successfully included header files",
+      "file": "SucceededIncludes.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Telemetry/SucceededIncludes.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "A count of all succeeded includes, grouped by filename."
+    },
+    {
+      "id": "cpp/telemetry/compiler-errors",
+      "name": "Compiler errors",
+      "file": "CompilerErrors.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Telemetry/CompilerErrors.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "A count of all compiler errors, grouped by error text."
+    },
+    {
+      "id": "cpp/telemetry/extraction-information",
+      "name": "C/C++ extraction information",
+      "file": "ExtractorInformation.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Telemetry/ExtractorInformation.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "Information about the extraction for a C/C++ database"
+    },
+    {
+      "id": "cpp/telemetry/database-quality",
+      "name": "Database quality",
+      "file": "DatabaseQuality.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Telemetry/DatabaseQuality.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "Metrics that indicate the quality of the database."
+    },
+    {
+      "id": "cpp/telemetry/failed-includes",
+      "name": "Failed to include header file",
+      "file": "MissingIncludes.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Telemetry/MissingIncludes.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "A count of all failed includes, grouped by filename."
+    },
+    {
+      "id": "cpp/telemetry/extraction-metrics",
+      "name": "Extraction metrics",
+      "file": "ExtractionMetrics.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Telemetry/ExtractionMetrics.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "Raw metrics relating to extraction."
+    },
+    {
+      "id": "cpp/summary/lines-of-user-code",
+      "name": "Total lines of user written C/C++ code in the database",
+      "file": "LinesOfUserCode.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Summary/LinesOfUserCode.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "lines-of-code",
+        "debug"
+      ],
+      "cwe": [],
+      "description": "The total number of lines of C/C++ code from the source code directory, excluding auto-generated files. This query counts the lines of code, excluding whitespace or comments. Note: If external libraries are included in the codebase either in a checked-in virtual environment or as vendored code, that will currently be counted as user written code."
+    },
+    {
+      "id": "cpp/summary/lines-of-code",
+      "name": "Total lines of C/C++ code in the database",
+      "file": "LinesOfCode.ql",
+      "path": "/home/nazanin/.codeql/packages/codeql/cpp-queries/1.7.0/Summary/LinesOfCode.ql",
+      "kind": "metric",
+      "severity": null,
+      "precision": null,
+      "tags": [
+        "summary",
+        "telemetry"
+      ],
+      "cwe": [],
+      "description": "The total number of lines of C/C++ code across all files, including system headers, libraries, and auto-generated files. This is a useful metric of the size of a database. For all files that were seen during the build, this query counts the lines of code, excluding whitespace or comments."
+    }
+  ]
+}
