@@ -1,0 +1,693 @@
+# C Security Rules
+
+# SonarQube
+...
+
+| Rule ID | Rule Name | Type | Severity |
+|---|---|---|---|
+| c:S5832 | Account validity should be verified when authenticating users with PAM | VULNERABILITY | MAJOR |
+| c:S5847 | Accessing files should not introduce TOCTOU vulnerabilities | VULNERABILITY | CRITICAL |
+| c:S5982 | The return value of "chdir" and "fchdir" should be verified | VULNERABILITY | CRITICAL |
+| c:S2245 | Using pseudorandom number generators (PRNGs) is security-sensitive | SECURITY_HOTSPOT | CRITICAL |
+| c:S2612 | File permissions should not be set to world-accessible values | VULNERABILITY | MAJOR |
+| c:S2755 | XML parsers should not be vulnerable to XXE attacks | VULNERABILITY | BLOCKER |
+| c:S4423 | Weak SSL/TLS protocols should not be used | VULNERABILITY | CRITICAL |
+| c:S4426 | Cryptographic keys should be robust | VULNERABILITY | CRITICAL |
+| c:S4790 | Using weak hashing algorithms is security-sensitive | SECURITY_HOTSPOT | CRITICAL |
+| c:S5527 | Server hostnames should be verified during SSL/TLS connections | VULNERABILITY | CRITICAL |
+| c:S5542 | Encryption algorithms should be used with secure mode and padding scheme | VULNERABILITY | CRITICAL |
+| c:S5547 | Cipher algorithms should be robust | VULNERABILITY | CRITICAL |
+| c:S5782 | POSIX functions should not be called with arguments that trigger buffer overflows | VULNERABILITY | BLOCKER |
+| c:S5813 | Using "strlen" or "wcslen" is security-sensitive | SECURITY_HOTSPOT | MAJOR |
+| c:S5814 | Using "strcat" or "wcscat" is security-sensitive | SECURITY_HOTSPOT | MAJOR |
+| c:S5815 | Using "strncat" or "wcsncat" is security-sensitive | SECURITY_HOTSPOT | MAJOR |
+| c:S5816 | Using "strncpy" or "wcsncpy" is security-sensitive | SECURITY_HOTSPOT | MAJOR |
+| c:S5824 | Temporary files should not be created with "tmpnam", "tmpnam_s", or "tmpnam_r" | VULNERABILITY | CRITICAL |
+| c:S5849 | Excessive Linux capabilities should not be granted | VULNERABILITY | MAJOR |
+| c:M23_368 | The library function "system" from "<cstdlib>" shall not be used | VULNERABILITY | CRITICAL |
+| c:S1079 | "scanf()" and "fscanf()" format strings should specify a field width for the "%s" string placeholder | VULNERABILITY | CRITICAL |
+| c:S1081 | Insecure functions should not be used | VULNERABILITY | CRITICAL |
+| c:S2068 | Credentials should not be hard-coded | VULNERABILITY | MAJOR |
+| c:S4830 | Server certificates should be verified during SSL/TLS connections | VULNERABILITY | CRITICAL |
+| c:S5332 | Using clear-text protocols is security-sensitive | SECURITY_HOTSPOT | CRITICAL |
+| c:S5443 | Temporary files should not be created in publicly writable directories | VULNERABILITY | CRITICAL |
+| c:S5798 | "memset" should not be used to delete sensitive data | VULNERABILITY | BLOCKER |
+| c:S5801 | Using "strcpy" or "wcscpy" is security-sensitive | SECURITY_HOTSPOT | MAJOR |
+| c:S5802 | The working directory should be changed when creating a chroot jail | VULNERABILITY | CRITICAL |
+| c:S6069 | Bounds should be checked when formatting strings | VULNERABILITY | CRITICAL |
+| c:S6418 | Secrets should not be hard-coded | VULNERABILITY | BLOCKER |
+| c:S1313 | IP addresses should not be hardcoded | VULNERABILITY | LOW |
+| c:M23_222 | The pointer returned by the C++ Standard Library functions "asctime", "ctime", "gmtime", "localtime", "localeconv", "getenv", "setlocale" or "strerror" must not be used following a subsequent call to the same function | VULNERABILITY | HIGH |
+| c:M23_103 | The right-hand operand of a logical "&&" or ..operator should not contain "persistent side effects" | VULNERABILITY | HIGH |
+
+---
+
+
+# Semgrep
+
+## Community(public)
+
+- `c.lang.security.double-free.double-free`
+- `c.lang.security.function-use-after-free.function-use-after-free`
+- `c.lang.security.info-leak-on-non-formatted-string.info-leak-on-non-formated-string`
+- `c.lang.security.insecure-use-gets-fn.insecure-use-gets-fn`
+- `c.lang.security.insecure-use-memset.insecure-use-memset`
+- `c.lang.security.insecure-use-printf-fn.insecure-use-printf-fn`
+- `c.lang.security.insecure-use-scanf-fn.insecure-use-scanf-fn`
+- `c.lang.security.insecure-use-strcat-fn.insecure-use-strcat-fn`
+- `c.lang.security.insecure-use-string-copy-fn.insecure-use-string-copy-fn`
+- `c.lang.security.insecure-use-strtok-fn.insecure-use-strtok-fn`
+- `c.lang.security.random-fd-exhaustion.random-fd-exhaustion`
+- `c.lang.security.use-after-free.use-after-free`
+- `generic.unicode.security.bidi.contains-bidirectional-characters`
+
+- `0xdea.c.argv-envp-access.raptor-argv-envp-access`
+- `0xdea.c.command-injection.raptor-command-injection`
+- `0xdea.c.double-free.raptor-double-free`
+- `0xdea.c.format-string-bugs.raptor-format-string-bugs`
+- `0xdea.c.high-entropy-assignment.raptor-high-entropy-assignment`
+- `0xdea.c.incorrect-order-setuid-setgid.raptor-incorrect-order-setuid-setgid`
+- `0xdea.c.incorrect-use-of-free.raptor-incorrect-use-of-free`
+- `0xdea.c.incorrect-use-of-memset.raptor-incorrect-use-of-memset`
+- `0xdea.c.incorrect-use-of-strncat.raptor-incorrect-use-of-strncat`
+- `0xdea.c.insecure-api-access-stat.raptor-insecure-api-access-stat`
+- `0xdea.c.insecure-api-alloca.raptor-insecure-api-alloca`
+- `0xdea.c.insecure-api-ato.raptor-insecure-api-ato`
+- `0xdea.c.insecure-api-gets.raptor-insecure-api-gets`
+- `0xdea.c.insecure-api-mktemp-tmpnam-tempnam.raptor-insecure-api-mktemp-tmpnam-tempnam`
+- `0xdea.c.insecure-api-rand-srand.raptor-insecure-api-rand-srand`
+- `0xdea.c.insecure-api-scanf.raptor-insecure-api-scanf`
+- `0xdea.c.insecure-api-sprintf-vsprintf.raptor-insecure-api-sprintf-vsprintf`
+- `0xdea.c.insecure-api-strcpy-strcat.raptor-insecure-api-strcpy-strcat`
+- `0xdea.c.integer-truncation.raptor-integer-truncation`
+- `0xdea.c.integer-wraparound.raptor-integer-wraparound`
+- `0xdea.c.memory-address-exposure.raptor-memory-address-exposure`
+- `0xdea.c.mismatched-memory-management.raptor-mismatched-memory-management`
+- `0xdea.c.off-by-one.raptor-off-by-one`
+- `0xdea.c.overlapping-source-destination.raptor-overlapping-source-destination`
+- `0xdea.c.putenv-stack-var.raptor-putenv-stack-var`
+- `0xdea.c.regex-dos.raptor-regex-dos`
+- `0xdea.c.ret-stack-address.raptor-ret-stack-address`
+- `0xdea.c.signed-unsigned-conversion.raptor-signed-unsigned-conversion`
+- `0xdea.c.unchecked-ret-malloc.raptor-unchecked-ret-malloc`
+- `0xdea.c.unchecked-ret-scanf.raptor-unchecked-ret-scanf`
+- `0xdea.c.unchecked-ret-setuid-seteuid.raptor-unchecked-ret-setuid-seteuid`
+- `0xdea.c.unsafe-ret-snprintf-vsnprintf.raptor-unsafe-ret-snprintf-vsnprintf`
+- `0xdea.c.unsafe-ret-strlcpy-strlcat.raptor-unsafe-ret-strlcpy-strlcat`
+- `0xdea.c.unsafe-strlen.raptor-unsafe-strlen`
+- `0xdea.c.unterminated-string-strncpy.raptor-unterminated-string-strncpy`
+- `0xdea.c.use-after-free.raptor-use-after-free`
+- `0xdea.c.use-of-source-size-in-copy.raptor-use-of-source-size-in-copy`
+- `0xdea.c.write-into-stack-buffer.raptor-write-into-stack-buffer`
+
+
+- `gitlab.flawfinder.AddAccessAllowedAce-1`
+- `gitlab.flawfinder.CreateProcess-1`
+- `gitlab.flawfinder.CreateProcessAsUser-1.CreateProcessWithLogon-1`
+- `gitlab.flawfinder.EVP_des_ecb-1.EVP_des_cbc-1.EVP_des_cfb-1.EVP_des_ofb-1.EVP_desx_cbc-1`
+- `gitlab.flawfinder.EVP_rc4_40-1.EVP_rc2_40_cbc-1.EVP_rc2_64_cbc-1`
+- `gitlab.flawfinder.GetTempFileName-1`
+- `gitlab.flawfinder.LoadLibrary-1`
+- `gitlab.flawfinder.LoadLibraryEx-1`
+- `gitlab.flawfinder.MultiByteToWideChar-1`
+- `gitlab.flawfinder.RpcImpersonateClient-1.ImpersonateLoggedOnUser-1.CoImpersonateClient-1.ImpersonateNamedPipeClient-1.ImpersonateDdeClientWindow-1.ImpersonateSecurityContext-1.SetThreadToken-1`
+- `gitlab.flawfinder.SetSecurityDescriptorDacl-1`
+- `gitlab.flawfinder.StrCat-1.StrCatA-1.StrcatW-1.lstrcatA-1.lstrcatW-1.strCatBuff-1.StrCatBuffA-1.StrCatBuffW-1.StrCatChainW-1._tccat-1._mbccat-1._ftcscat-1.StrCatN-1.StrCatNA-1.StrCatNW-1.StrNCat-1.StrNCatA-1.StrNCatW-1.lstrncat-1.lstrcatnA-1.lstrcatnW-1`
+- `gitlab.flawfinder.access-1`
+- `gitlab.flawfinder.chmod-1`
+- `gitlab.flawfinder.chown-1`
+- `gitlab.flawfinder.crypt-1.crypt_r-1`
+- `gitlab.flawfinder.execl-1.execlp-1.execle-1.execv-1.execvp-1.popen-1.WinExec-1.ShellExecute-1`
+- `gitlab.flawfinder.fopen-1.open-1`
+- `gitlab.flawfinder.fprintf-1.vfprintf-1._ftprintf-1._vftprintf-1.fwprintf-1.fvwprintf-1`
+- `gitlab.flawfinder.fscanf-1.sscanf-1.vsscanf-1.vfscanf-1._ftscanf-1.fwscanf-1.vfwscanf-1.vswscanf-1`
+- `gitlab.flawfinder.g_get_home_dir-1`
+- `gitlab.flawfinder.g_get_tmp_dir-1`
+- `gitlab.flawfinder.getenv-1.curl_getenv-1`
+- `gitlab.flawfinder.getlogin-1`
+- `gitlab.flawfinder.getpass-1`
+- `gitlab.flawfinder.getwd-1`
+- `gitlab.flawfinder.lstrcat-1.wcscat-1._tcscat-1._mbscat-1`
+- `gitlab.flawfinder.lstrcatn-1.wcsncat-1._tcsncat-1._mbsnbcat-1`
+- `gitlab.flawfinder.lstrcpy-1.wcscpy-1._tcscpy-1._mbscpy-1`
+- `gitlab.flawfinder.lstrcpyn-1.wcsncpy-1._tcsncpy-1._mbsnbcpy-1`
+- `gitlab.flawfinder.memcpy-1.CopyMemory-1.bcopy-1`
+- `gitlab.flawfinder.mkstemp-1`
+- `gitlab.flawfinder.printf-1.vprintf-1.vwprintf-1.vfwprintf-1._vtprintf-1.wprintf-1`
+- `gitlab.flawfinder.readlink-1`
+- `gitlab.flawfinder.realpath-1`
+- `gitlab.flawfinder.snprintf-1.vsnprintf-1._snprintf-1._sntprintf-1._vsntprintf-1`
+- `gitlab.flawfinder.sprintf-1.vsprintf-1.swprintf-1.vswprintf-1._stprintf-1._vstprintf-1`
+- `gitlab.flawfinder.strccpy-1.strcadd-1`
+- `gitlab.flawfinder.strcpyA-1.strcpyW-1.StrCpy-1.StrCpyA-1.lstrcpyA-1.lstrcpyW-1._tccpy-1._mbccpy-1._ftcscpy-1._mbsncpy-1.StrCpyN-1.StrCpyNA-1.StrCpyNW-1.StrNCpy-1.strcpynA-1.StrNCpyA-1.StrNCpyW-1.lstrcpynA-1.lstrcpynW-1`
+- `gitlab.flawfinder.streadd-1.strecpy-1`
+- `gitlab.flawfinder.strlen-1.wcslen-1._tcslen-1._mbslen-1`
+- `gitlab.flawfinder.strncat-1`
+- `gitlab.flawfinder.strncpy-1`
+- `gitlab.flawfinder.strtrns-1`
+- `gitlab.flawfinder.syslog-1`
+- `gitlab.flawfinder.system-1`
+- `gitlab.flawfinder.tmpfile-1`
+- `gitlab.flawfinder.tmpnam-1.tempnam-1`
+- `gitlab.flawfinder.umask-1`
+
+## Pro
+
+
+
+- `cpp.lang.security.misc.microsoft-banned-list-strncpy.microsoft-banned-list-strncpy`
+- `cpp.lang.security.misc.microsoft-banned-list-strncpya.microsoft-banned-list-strncpya`
+- `cpp.lang.security.misc.microsoft-banned-list-strncpyw.microsoft-banned-list-strncpyw`
+- `cpp.lang.security.misc.microsoft-banned-list-swprintf.microsoft-banned-list-swprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-ualstrcpyw.microsoft-banned-list-ualstrcpyw`
+- `cpp.lang.security.misc.microsoft-banned-list-vsnprintf.microsoft-banned-list-vsnprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-vsprintf.microsoft-banned-list-vsprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-vswprintf.microsoft-banned-list-vswprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-wcscat.microsoft-banned-list-wcscat`
+- `cpp.lang.security.misc.microsoft-banned-list-wcscpy.microsoft-banned-list-wcscpy`
+- `cpp.lang.security.misc.microsoft-banned-list-wcsncat.microsoft-banned-list-wcsncat`
+- `cpp.lang.security.misc.microsoft-banned-list-wcsncpy.microsoft-banned-list-wcsncpy`
+- `cpp.lang.security.misc.microsoft-banned-list-wnsprintf.microsoft-banned-list-wnsprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-wnsprintfa.microsoft-banned-list-wnsprintfa`
+- `cpp.lang.security.misc.microsoft-banned-list-wsprintf.microsoft-banned-list-wsprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-wsprintfa.microsoft-banned-list-wsprintfa`
+- `cpp.lang.security.misc.microsoft-banned-list-wsprintfw.microsoft-banned-list-wsprintfw`
+- `cpp.lang.security.misc.microsoft-banned-list-wvnsprintf.microsoft-banned-list-wvnsprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-wvnsprintfa.microsoft-banned-list-wvnsprintfa`
+- `cpp.lang.security.misc.microsoft-banned-list-wvnsprintfw.microsoft-banned-list-wvnsprintfw`
+- `cpp.lang.security.misc.microsoft-banned-list-wvsprintf.microsoft-banned-list-wvsprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-wvsprintfa.microsoft-banned-list-wvsprintfa`
+- `cpp.lang.security.misc.microsoft-banned-list-wvsprintfw.microsoft-banned-list-wvsprintfw`
+- `cpp.lang.security.misc.microsoft-banned-list-_fstrcat.microsoft-banned-list-_fstrcat`
+- `cpp.lang.security.misc.microsoft-banned-list-_fstrcpy.microsoft-banned-list-_fstrcpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_fstrncat.microsoft-banned-list-_fstrncat`
+- `cpp.lang.security.misc.microsoft-banned-list-_fstrncpy.microsoft-banned-list-_fstrncpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_ftccat.microsoft-banned-list-_ftccat`
+- `cpp.lang.security.misc.microsoft-banned-list-_ftccpy.microsoft-banned-list-_ftccpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_ftcscat.microsoft-banned-list-_ftcscat`
+- `cpp.lang.security.misc.microsoft-banned-list-_ftcscpy.microsoft-banned-list-_ftcscpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_getts.microsoft-banned-list-_getts`
+- `cpp.lang.security.misc.microsoft-banned-list-_gettws.microsoft-banned-list-_gettws`
+- `cpp.lang.security.misc.microsoft-banned-list-_getws.microsoft-banned-list-_getws`
+- `cpp.lang.security.misc.microsoft-banned-list-_makepath.microsoft-banned-list-_makepath`
+- `cpp.lang.security.misc.microsoft-banned-list-_mbccat.microsoft-banned-list-_mbccat`
+- `cpp.lang.security.misc.microsoft-banned-list-_mbscat.microsoft-banned-list-_mbscat`
+- `cpp.lang.security.misc.microsoft-banned-list-_snprintf.microsoft-banned-list-_snprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_sntprintf.microsoft-banned-list-_sntprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_sntscanf.microsoft-banned-list-_sntscanf`
+- `cpp.lang.security.misc.microsoft-banned-list-_snwprintf.microsoft-banned-list-_snwprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_splitpath.microsoft-banned-list-_splitpath`
+- `cpp.lang.security.misc.microsoft-banned-list-_stprintf.microsoft-banned-list-_stprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_stscanf.microsoft-banned-list-_stscanf`
+- `cpp.lang.security.misc.microsoft-banned-list-_tccat.microsoft-banned-list-_tccat`
+- `cpp.lang.security.misc.microsoft-banned-list-_tccpy.microsoft-banned-list-_tccpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_tcscat.microsoft-banned-list-_tcscat`
+- `cpp.lang.security.misc.microsoft-banned-list-_tcscpy.microsoft-banned-list-_tcscpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_tcsncat.microsoft-banned-list-_tcsncat`
+- `cpp.lang.security.misc.microsoft-banned-list-_tcsncpy.microsoft-banned-list-_tcsncpy`
+- `cpp.lang.security.misc.microsoft-banned-list-_tmakepath.microsoft-banned-list-_tmakepath`
+- `cpp.lang.security.misc.microsoft-banned-list-_tscanf.microsoft-banned-list-_tscanf`
+- `cpp.lang.security.misc.microsoft-banned-list-_tsplitpath.microsoft-banned-list-_tsplitpath`
+- `cpp.lang.security.misc.microsoft-banned-list-_vsnprintf.microsoft-banned-list-_vsnprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_vsntprintf.microsoft-banned-list-_vsntprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_vsnwprintf.microsoft-banned-list-_vsnwprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_vstprintf.microsoft-banned-list-_vstprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-_wmakepath.microsoft-banned-list-_wmakepath`
+- `cpp.lang.security.misc.microsoft-banned-list-_wsplitpath.microsoft-banned-list-_wsplitpath`
+- `cpp.lang.security.misc.microsoft-banned-list-gets.microsoft-banned-list-gets`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcat.microsoft-banned-list-lstrcat`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcata.microsoft-banned-list-lstrcata`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcatn.microsoft-banned-list-lstrcatn`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcatna.microsoft-banned-list-lstrcatna`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcatnw.microsoft-banned-list-lstrcatnw`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcatw.microsoft-banned-list-lstrcatw`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcpy.microsoft-banned-list-lstrcpy`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcpya.microsoft-banned-list-lstrcpya`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcpyn.microsoft-banned-list-lstrcpyn`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcpyna.microsoft-banned-list-lstrcpyna`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcpynw.microsoft-banned-list-lstrcpynw`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrcpyw.microsoft-banned-list-lstrcpyw`
+- `cpp.lang.security.misc.microsoft-banned-list-lstrncat.microsoft-banned-list-lstrncat`
+- `cpp.lang.security.misc.microsoft-banned-list-makepath.microsoft-banned-list-makepath`
+- `cpp.lang.security.misc.microsoft-banned-list-nsprintf.microsoft-banned-list-nsprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-oemtocharw.microsoft-banned-list-oemtocharw`
+- `cpp.lang.security.misc.microsoft-banned-list-snscanf.microsoft-banned-list-snscanf`
+- `cpp.lang.security.misc.microsoft-banned-list-snwscanf.microsoft-banned-list-snwscanf`
+- `cpp.lang.security.misc.microsoft-banned-list-sprintf.microsoft-banned-list-sprintf`
+- `cpp.lang.security.misc.microsoft-banned-list-sprintfa.microsoft-banned-list-sprintfa`
+- `cpp.lang.security.misc.microsoft-banned-list-sprintfw.microsoft-banned-list-sprintfw`
+- `cpp.lang.security.misc.microsoft-banned-list-strcat.microsoft-banned-list-strcat`
+- `cpp.lang.security.misc.microsoft-banned-list-strcata.microsoft-banned-list-strcata`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatbuff.microsoft-banned-list-strcatbuff`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatbuffa.microsoft-banned-list-strcatbuffa`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatbuffw.microsoft-banned-list-strcatbuffw`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatchainw.microsoft-banned-list-strcatchainw`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatn.microsoft-banned-list-strcatn`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatna.microsoft-banned-list-strcatna`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatnw.microsoft-banned-list-strcatnw`
+- `cpp.lang.security.misc.microsoft-banned-list-strcatw.microsoft-banned-list-strcatw`
+- `cpp.lang.security.misc.microsoft-banned-list-strcpy.microsoft-banned-list-strcpy`
+- `cpp.lang.security.misc.microsoft-banned-list-strcpya.microsoft-banned-list-strcpya`
+- `cpp.lang.security.misc.microsoft-banned-list-strcpyn.microsoft-banned-list-strcpyn`
+- `cpp.lang.security.misc.microsoft-banned-list-strcpyna.microsoft-banned-list-strcpyna`
+- `cpp.lang.security.misc.microsoft-banned-list-strcpynw.microsoft-banned-list-strcpynw`
+- `cpp.lang.security.misc.microsoft-banned-list-strcpyw.microsoft-banned-list-strcpyw`
+- `cpp.lang.security.misc.microsoft-banned-list-strncat.microsoft-banned-list-strncat`
+- `cpp.lang.security.misc.microsoft-banned-list-strncata.microsoft-banned-list-strncata`
+- `cpp.lang.security.misc.microsoft-banned-list-strncatw.microsoft-banned-list-strncatw`
+
+
+- `cpp.lang.security.rng.predictable-seed-rng-constant.predictable-seed-rng-constant`
+- `cpp.lang.security.rng.predictable-seed-rng-time.predictable-seed-rng-time`
+
+
+- `cpp.lang.security.sql.sql-injection.sql-injection`
+
+- `cpp.lang.security.strings.alloc-strlen.alloc-strlen`
+- `cpp.lang.security.strings.missing-nul-cpp-string-memcpy.missing-nul-cpp-string-memcpy`
+- `cpp.lang.security.strings.narrow-to-wide-string-mismatch.narrow-to-wide-string-mismatch`
+- `cpp.lang.security.strings.readlink-null-terminator.readlink-null-terminator`
+- `cpp.lang.security.strings.return-c-str.return-c-str`
+- `cpp.lang.security.strings.snprintf-return-value-length.snprintf-return-value-length`
+- `cpp.lang.security.strings.snprintf-return-value-snprintf.snprintf-return-value-snprintf`
+- `cpp.lang.security.strings.snprintf-source-size.snprintf-source-size`
+- `cpp.lang.security.strings.std-string-npos.std-string-npos`
+- `cpp.lang.security.strings.string-buffer-overflow.string-buffer-overflow`
+- `cpp.lang.security.strings.string-view-data-null-terminator.string-view-data-null-terminator`
+- `cpp.lang.security.strings.string-view-temporary-string.string-view-temporary-string`
+- `cpp.lang.security.strings.unbounded-copy-to-stack-buffer.unbounded-copy-to-stack-buffer`
+- `cpp.lang.security.strings.wide-to-narrow-string-mismatch.wide-to-narrow-string-mismatch`
+
+
+- `cpp.lang.security.system-command.command-injection-path.command-injection-path`
+- `cpp.lang.security.system-command.dont-call-system.dont-call-system`
+
+
+- `cpp.lang.security.uri.http-url.http-url`
+- `cpp.lang.security.uri.url-manipulation-generic.url-manipulation-generic`
+
+- `cpp.lang.security.use-after-free.local-variable-malloc-free.local-variable-malloc-free`
+- `cpp.lang.security.use-after-free.local-variable-new-delete.local-variable-new-delete`
+
+
+- `cpp.libxml2.security.libxml2-audit-parser.libxml2-audit-parser`
+- `cpp.libxml2.security.libxml2-expand-local-entities.libxml2-expand-local-entities`
+- `cpp.libxml2.security.libxml2-expand-remote-dtd.libxml2-expand-remote-dtd`
+- `cpp.libxml2.security.libxml2-expand-xinclude.libxml2-expand-xinclude`
+
+- `cpp.lang.security.containers.std-return-data.std-return-data`
+- `cpp.lang.security.containers.std-vector-invalidation.std-vector-invalidation`
+
+- `cpp.lang.security.crypto.certificate.curl-disabled-cert-validation.curl-disabled-cert-validation`
+- `cpp.lang.security.crypto.certificate.curl-insecure-required-version.curl-insecure-required-version`
+- `cpp.lang.security.crypto.certificate.openssl-disabled-cert-validation.openssl-disabled-cert-validation`
+- `cpp.lang.security.crypto.certificate.openssl-insecure-required-version.openssl-insecure-required-version`
+- `cpp.lang.security.crypto.insecure-hash.insecure-hash`
+- `cpp.lang.security.crypto.key.small-key-size.small-key-size`
+
+- `cpp.lang.security.filesystem.file-access-before-action.file-access-before-action`
+- `cpp.lang.security.filesystem.file-stat-before-action.file-stat-before-action`
+- `cpp.lang.security.filesystem.path-manipulation.path-manipulation`
+- `cpp.lang.security.filesystem.world-writable-file.world-writable-file`
+
+
+- `cpp.lang.security.format-string.format-string-injection.format-string-injection`
+
+
+- `cpp.lang.security.ldap.ldap-injection-dn.ldap-injection-dn`
+- `cpp.lang.security.ldap.ldap-injection-filter.ldap-injection-filter`
+
+
+- `cpp.lang.security.libraries.dynamic-library-path.dynamic-library-path`
+
+
+- `cpp.lang.security.memory.allocation.tainted-allocation-size.tainted-allocation-size`
+- `cpp.lang.security.memory.deallocation.double-delete.double-delete`
+- `cpp.lang.security.memory.deallocation.double-free.double-free`
+- `cpp.lang.security.memory.integer-overflow-allocation.integer-overflow-allocation`
+- `cpp.lang.security.memory.negative-return-value-array-index.negative-return-value-array-index`
+- `cpp.lang.security.memory.null-deref.null-library-function.null-library-function`
+- `cpp.lang.security.memory.unvalidated-array-index.unvalidated-array-index`
+
+---
+
+
+## CodeQL
+
+
+- `cpp/access-memory-location-after-end-buffer-strlen`
+- `cpp/alloca-in-loop`
+- `cpp/allocation-too-small`
+- `cpp/bad-addition-overflow-check`
+- `cpp/badly-bounded-write`
+- `cpp/bad-strncpy-size`
+- `cpp/boost/tls-settings-misconfiguration`
+- `cpp/boost/use-of-deprecated-hardcoded-security-protocol`
+- `cpp/buffer-access-with-incorrect-length-value`
+- `cpp/call-to-function-without-wrapper`
+- `cpp/certificate-not-checked`
+- `cpp/certificate-result-conflation`
+- `cpp/cgi-xss`
+- `cpp/cleartext-storage-buffer`
+- `cpp/cleartext-storage-database`
+- `cpp/cleartext-storage-file`
+- `cpp/cleartext-transmission`
+- `cpp/comma-before-misleading-indentation`
+- `cpp/command-line-injection`
+- `cpp/comparison-with-wider-type`
+- `cpp/constant-array-overflow`
+- `cpp/crypto-primitive`
+- `cpp/dangerous-cin`
+- `cpp/dangerous-function-overflow`
+- `cpp/dangerous-use-convert-function`
+- `cpp/dangerous-use-of-exception-blocks`
+- `cpp/dangerous-use-of-ssl-shutdown`
+- `cpp/dangerous-use-of-transformation-after-operation`
+- `cpp/data-decompression-bomb`
+- `cpp/double-free`
+- `cpp/double-release`
+- `cpp/drop-linux-privileges-outoforder`
+- `cpp/errors-after-refactoring`
+- `cpp/errors-of-undefined-program-behavior`
+- `cpp/errors-when-using-bit-operations`
+- `cpp/errors-when-using-variable-declaration-inside-loop`
+- `cpp/experimental-double-free`
+- `cpp/external-entity-expansion`
+- `cpp/hresult-boolean-conversion`
+- `cpp/improper-check-return-value-scanf`
+- `cpp/incorrect-allocation-error-handling`
+- `cpp/incorrectly-checked-scanf`
+- `cpp/incorrect-not-operator-usage`
+- `cpp/incorrect-string-type-conversion`
+- `cpp/insecure-generation-of-filename`
+- `cpp/insufficient-key-size`
+- `cpp/integer-multiplication-cast-to-long`
+- `cpp/invalid-pointer-deref`
+- `cpp/iterator-to-expired-container`
+- `cpp/late-check-of-function-argument`
+- `cpp/linux-kernel-double-fetch-vulnerability`
+- `cpp/linux-kernel-no-check-before-unsafe-put-user`
+- `cpp/memory-leak-on-failed-call-to-realloc`
+- `cpp/memory-unsafe-function-scan`
+- `cpp/memset-may-be-deleted`
+- `cpp/missing-check-scanf`
+- `cpp/multiplication-overflow-in-alloc`
+- `cpp/new-free-mismatch`
+- `cpp/non-constant-format`
+- `cpp/non-https-url`
+- `cpp/no-space-for-terminator`
+- `cpp/off-by-one-array-access`
+- `cpp/offset-use-before-range-check`
+- `cpp/open-call-with-mode-argument`
+- `cpp/openssl-heartbleed`
+- `cpp/operator-find-incorrectly-used-exceptions`
+- `cpp/operator-find-incorrectly-used-switch`
+- `cpp/operator-precedence-logic-error-when-use-bool-type`
+- `cpp/overflow-buffer`
+- `cpp/overflowing-snprintf`
+- `cpp/overrunning-write`
+- `cpp/overrunning-write-with-float`
+- `cpp/overrun-write`
+- `cpp/pam-auth-bypass`
+- `cpp/path-injection`
+- `cpp/pointer-overflow-check`
+- `cpp/potentially-dangerous-function`
+- `cpp/potential-system-data-exposure`
+- `cpp/private-cleartext-write`
+- `cpp/redundant-null-check-param`
+- `cpp/redundant-null-check-simple`
+- `cpp/return-stack-allocated-memory`
+- `cpp/sign-conversion-pointer-arithmetic`
+- `cpp/signed-overflow-check`
+- `cpp/sql-injection`
+- `cpp/static-buffer-overflow`
+- `cpp/suspicious-add-sizeof`
+- `cpp/suspicious-allocation-size`
+- `cpp/suspicious-pointer-scaling`
+- `cpp/suspicious-pointer-scaling-void`
+- `cpp/suspicious-sizeof`
+- `cpp/system-data-exposure`
+- `cpp/tainted-format-string`
+- `cpp/tainted-permissions-check`
+- `cpp/toctou-race-condition`
+- `cpp/too-few-arguments`
+- `cpp/type-confusion`
+- `cpp/unbounded-write`
+- `cpp/uncontrolled-allocation-size`
+- `cpp/uncontrolled-arithmetic`
+- `cpp/uncontrolled-process-operation`
+- `cpp/uninitialized-local`
+- `cpp/unsafe-create-process-call`
+- `cpp/unsafe-dacl-security-descriptor`
+- `cpp/unsafe-strcat`
+- `cpp/unsafe-strncat`
+- `cpp/unsafe-use-of-this`
+- `cpp/unsigned-difference-expression-compared-zero`
+- `cpp/unterminated-variadic-call`
+- `cpp/upcast-array-pointer-arithmetic`
+- `cpp/use-after-expired-lifetime`
+- `cpp/use-after-free`
+- `cpp/use-of-string-after-lifetime-ends`
+- `cpp/use-of-unique-pointer-after-lifetime-ends`
+- `cpp/user-controlled-bypass`
+- `cpp/using-expired-stack-address`
+- `cpp/very-likely-overrunning-write`
+- `cpp/weak-cryptographic-algorithm`
+- `cpp/wordexp-injection`
+- `cpp/work-with-changing-working-directories`
+- `cpp/work-with-file-without-permissions-rights`
+- `cpp/world-writable-file-creation`
+- `cpp/wrong-number-format-arguments`
+- `cpp/wrong-type-format-argument`
+
+
+---
+
+
+## Cppcheck
+
+
+- autoVariables
+- returnReference
+- danglingReference
+- returnTempReference
+- danglingTempReference
+- autovarInvalidDeallocation
+- returnDanglingLifetime
+- invalidLifetime
+- danglingLifetime
+- danglingTemporaryLifetime
+- deallocret
+- doubleFree
+- leakNoVarFunctionCall
+- leakReturnValNotUsed
+- memleak
+- resourceLeak
+- deallocuse
+- mismatchAllocDealloc
+- memleakOnRealloc
+- invalidFree
+- memsetClass
+- memsetClassReference
+- mallocOnClassError
+
+
+
+- nullPointer
+- nullPointerDefaultArg
+- nullPointerRedundantCheck
+- nullPointerArithmetic
+- nullPointerArithmeticRedundantCheck
+- assignBoolToPointer
+- pointerArithBool
+- comparePointers
+- pointerOutOfBounds
+- pointerOutOfBoundsCond
+- objectIndex
+- stringLiteralWrite
+
+
+
+- arrayIndexOutOfBounds
+- arrayIndexOutOfBoundsCond
+- negativeIndex
+- arrayIndexThenCheck
+- bufferAccessOutOfBounds
+- negativeArraySize
+- negativeMemoryAllocationSize
+- containerOutOfBounds
+- stlOutOfBounds
+- negativeContainerIndex
+
+
+
+- integerOverflow
+- floatConversionOverflow
+- shiftNegative
+- shiftTooManyBits
+- shiftTooManyBitsSigned
+- shiftNegativeLHS
+- zerodiv
+- zerodivcond
+- invalidTestForOverflow
+- signConversion
+
+
+
+- invalidscanf
+- invalidScanfFormatWidth
+- invalidScanfArgType_s
+- invalidScanfArgType_int
+- invalidScanfArgType_float
+- invalidLengthModifierError
+- wrongPrintfScanfArgNum
+- wrongPrintfScanfParameterPositionError
+- invalidPrintfArgType_s
+- invalidPrintfArgType_n
+- invalidPrintfArgType_p
+- invalidPrintfArgType_uint
+- invalidPrintfArgType_sint
+- invalidPrintfArgType_float
+- sprintfOverlappingData
+
+
+
+- IOWithoutPositioning
+- readWriteOnlyFile
+- writeReadOnlyFile
+- useClosedFile
+- seekOnAppendedFile
+- incompatibleFileOpen
+
+
+
+- invalidIterator1
+- iterators1
+- iterators2
+- iterators3
+- invalidContainerLoop
+- invalidContainer
+- mismatchingContainerIterator
+- mismatchingContainers
+- mismatchingContainerExpression
+- eraseDereference
+- stlBoundaries
+- stlcstr
+- stlcstrthrow
+- derefInvalidIterator
+
+
+- ignoredReturnValue
+- missingReturn
+- invalidFunctionArg
+- invalidFunctionArgBool
+- invalidFunctionArgStr
+- selfInitialization
+- virtualDestructor
+- unknownEvaluationOrder
+- overlappingWriteUnion
+- overlappingWriteFunction
+- assignmentInAssert
+- assertWithSideEffect
+- varFuncNullUB
+- signedCharArrayIndex
+- unknownSignCharArrayIndex
+- charBitOp
+- checkCastIntToCharAndBack
+- sizeofwithsilentarraypointer
+- pointerSize
+- sizeofDivisionMemfunc
+- sizeofwithnumericparameter
+- sizeofsizeof
+- sizeofCalculation
+- sizeofFunctionCall
+- multiplySizeof
+- divideSizeof
+- sizeofVoid
+- sizeofDereferencedVoidPointer
+- arithOperationsOnVoidPointer
+- strPlusChar
+
+
+- compareBoolExpressionWithInt
+- comparisonOfBoolWithInvalidComparator
+- badBitmaskCheck
+- incorrectLogicOperator
+- moduloAlwaysTrueFalse
+- oppositeInnerCondition
+- identicalInnerCondition
+- identicalConditionAfterEarlyExit
+- incorrectStringCompare
+- literalWithCharPtrCompare
+- charLiteralWithCharPtrCompare
+- incorrectStringBooleanError
+- incorrectCharBooleanError
+- staticStringCompare
+- stringCompare
+- overlappingStrcmp
+- stlIfFind
+- StlMissingComparison
+- accessMoved
+- accessForwarded
+- funcArgOrderDifferent
+- globalLockGuard
+- localMutex
+- suspiciousCase
+- selfAssignment
+- clarifyStatement
+- suspiciousSemicolon
+- incompleteArrayFill
+- uselessCallsCompare
+- uselessCallsSwap
+- uselessCallsEmpty
+- uselessCallsRemove
+- publicAllocationError
+- leakUnsafeArgAlloc
+- copyCtorPointerCopying
+- noCopyConstructor
+- noOperatorEq
+- noDestructor
+- uninitMemberVar
+- uninitMemberVarPrivate
+- uninitDerivedMemberVar
+- uninitDerivedMemberVarPrivate
+- missingMemberCopy
+- operatorEqVarError
+- thisSubtraction
+- operatorEqToSelf
+- duplInheritedMember
+- thisUseAfterFree
+- unsafeClassRefMember
+- exceptThrowInDestructor
+- exceptDeallocThrow
+- memsetZeroBytes
+- memsetValueOutOfRange
+- argumentSize
+- va_start_wrongParameter
+- pointerAdditionResultNotNull
+
+
+
+- AssignmentAddressToInteger
+- AssignmentIntegerToAddress
+- CastIntegerToAddressAtReturn
+- CastAddressToIntegerAtReturn
+- wrongmathcall
+- unpreciseMathCall
+- memsetFloat
+- memsetClassFloat
+- fflushOnInputStream
+- invalidPointerCast
+- rethrowNoCurrentException
+
+
+
+- uninitdata
+- uninitStructMember
+- uninitvar
+- uninitstring
+- operatorEqMissingReturnStatement
+- va_start_referencePassed
+- va_end_missing
+- va_list_usedBeforeStarted
+- va_start_subsequentCalls
