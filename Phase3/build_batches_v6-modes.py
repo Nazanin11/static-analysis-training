@@ -33,11 +33,12 @@ from collections import defaultdict
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-INPUT_FILE  = "merged_candidates.json"
-OUTPUT_FILE = "llm_triage_batches.json"
-BIRD_SRC_DIR = "/home/master/Work/StaticCodeAnalysis/BIRD/AI_Triage/bird-2.17.1"
+INPUT_FILE  = "reports/sonarqube/merged_candidates.json"
+OUTPUT_FILE = "reports/llm_triage/llm_triage_batches.json"
+BIRD_SRC_DIR = "/home/nazanin/Projects/bird-2.17.1"
 TAGS_FILE   = "tags"
 CG_FILE     = "bird.bc.callgraph.dot"
+SECURITY_RULES_FILE = "reports/c-security-rules.json"
 
 MAX_TEST_FINDINGS = 100
 MAX_FILE_LINES    = 6000
@@ -96,6 +97,61 @@ _HAZARD_KEYWORDS_RE = re.compile(
     r'|injection|deadlock)\b',
     re.IGNORECASE
 )
+
+
+def load_security_rule_ids():
+    """
+    Load all security rule IDs from the central security-rules.json file.
+    The JSON contains rules for SonarQube, Semgrep, CodeQL, and Cppcheck.
+    """
+    if not os.path.exists(SECURITY_RULES_FILE):
+        print(f"[ERROR] Security rules file not found: {SECURITY_RULES_FILE}")
+        return set()
+
+    with open(SECURITY_RULES_FILE, "r", encoding="utf-8") as fh:
+        data = json.load(fh)
+
+    rule_ids = set()
+
+    def collect_rule_ids(obj):
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                if key in {"rule", "rule_id", "ruleId", "id"} and isinstance(value, str):
+                    rule_ids.add(value)
+                else:
+                    collect_rule_ids(value)
+
+        elif isinstance(obj, list):
+            for item in obj:
+                collect_rule_ids(item)
+
+        elif isinstance(obj, str):
+            rule_ids.add(obj)
+
+    collect_rule_ids(data)
+
+    print(f"[SECURITY RULES] Loaded {len(rule_ids)} security rules")
+
+    return rule_ids
+
+def normalize_rule_id(finding):
+    """
+    Normalize external tool rule IDs.
+
+    Example:
+        c:S3519
+        -> c:S3519
+
+        external_Cppcheck:allocaCalled
+        -> allocaCalled
+    """
+    rule_id = finding.get("rule", "")
+
+    if rule_id.startswith("external_") and ":" in rule_id:
+        return rule_id.split(":", 1)[1]
+
+    return rule_id
+
 
 # ---------------------------------------------------------------------------
 # Phase 1 — AST (ctags)
@@ -397,36 +453,60 @@ def main():
 
     ast_map, func_ranges = load_ast()
     callers_of, callees_of = load_callgraph()
+    security_rule_ids = load_security_rule_ids()
 
     with open(INPUT_FILE, "r") as fh:
-        raw_findings = json.load(fh)
+        data = json.load(fh)
+
+    raw_findings = data["findings"]
+    path_filtered = 0
+    ignore_rule_filtered = 0
+    noise_rule_filtered = 0
+    security_rule_filtered = 0
+    severity_filtered = 0
 
     # Filter + deduplicate
     filtered = []
     for f in raw_findings:
-        rule_id = f.get("Rule_ID", "")
-        sev     = str(f.get("Severity", "")).lower()
-        filepath = f.get("File", "")
+        rule_id = f.get("rule", "")
+        sev = str(f.get("severity", "")).lower()
 
+        component = f.get("component", "")
+        filepath = component.split(":", 1)[1] if ":" in component else component
+
+        line = f.get("line", 0)
         # Drop obvious non-prod paths
         if any(ign in filepath for ign in IGNORE_PATHS):
+            path_filtered += 1
             continue
 
         # Drop pure style/maintenance rules entirely
         if rule_id in IGNORE_RULES:
+            ignore_rule_filtered += 1
             continue
 
         # Drop tool-noise artefacts from partial analysis
         if rule_id in NOISE_RULES:
+            noise_rule_filtered += 1
+            continue
+
+
+        # Keep only findings whose rule exists in the central security rule set
+        normalized_rule_id = normalize_rule_id(f)
+
+        if normalized_rule_id not in security_rule_ids:
+            security_rule_filtered += 1
             continue
 
         if MODE == 1:
             # Strict: only high-value severities
             if sev not in ALLOWED_SEVERITIES:
+                severity_filtered += 1
                 continue
         else:
             # MODE 2: keep SECURITY_RULES even if severity is low (style/info)
             if (sev not in ALLOWED_SEVERITIES) and (rule_id not in SECURITY_RULES):
+                severity_filtered += 1
                 continue
 
         filtered.append(f)
@@ -434,18 +514,40 @@ def main():
     seen_keys: set = set()
     deduped = []
     for f in filtered:
-        key = (f.get("File", ""), f.get("Line", 0), f.get("Rule_ID", ""))
+        key = (
+            f.get("component", ""),
+            f.get("line", 0),
+            f.get("rule", "")
+        )
         if key not in seen_keys:
             seen_keys.add(key)
             deduped.append(f)
 
     pilot = deduped[:MAX_TEST_FINDINGS]
-    print(f"[FILTER] {len(raw_findings)} total → {len(filtered)} filtered "
-          f"→ {len(deduped)} deduped → {len(pilot)} pilot findings")
+    print("=" * 60)
+    print("FILTER STATISTICS")
+    print("=" * 60)
+
+    print(f"[INPUT]                 {len(raw_findings)} findings")
+    print(f"[PATH FILTER]           {path_filtered} removed")
+    print(f"[IGNORE RULE FILTER]    {ignore_rule_filtered} removed")
+    print(f"[NOISE RULE FILTER]     {noise_rule_filtered} removed")
+    print(f"[SECURITY RULE FILTER]  {security_rule_filtered} removed")
+    print(f"[SEVERITY FILTER]       {severity_filtered} removed")
+    print(f"[AFTER ALL FILTERS]     {len(filtered)} findings")
+    print(f"[DEDUPLICATION]         {len(filtered) - len(deduped)} removed")
+    print(f"[UNIQUE FINDINGS]       {len(deduped)} findings")
+    print(f"[PILOT LIMIT]           {max(0, len(deduped) - len(pilot))} removed")
+    print(f"[PILOT FINDINGS]        {len(pilot)} findings")
+    print("=" * 60)
 
     by_file: dict[str, list] = defaultdict(list)
+
     for f in pilot:
-        by_file[f["File"].lstrip("./")].append(f)
+        component = f.get("component", "")
+        filepath = component.split(":", 1)[1] if ":" in component else component
+
+        by_file[filepath.lstrip("./")].append(f)
 
     batches = []
     batch_id = 0
@@ -462,14 +564,16 @@ def main():
             lines = fh.readlines()
 
         for finding in file_findings:
-            line_idx = finding["Line"] - 1
+            line_idx = finding.get("line", 0) - 1
             if not (0 <= line_idx < len(lines)):
                 # Line 0 = file-level finding (e.g. missing-header-guard) → clamp to line 1
-                if finding["Line"] == 0:
+                if finding.get("line", 0) == 0:
                     line_idx = 0
                 else:
-                    print(f"[SKIP] Line {finding['Line']} out of bounds in {filepath} "
-                        f"(file has {len(lines)} lines) — Rule: {finding.get('Rule_ID')}")
+                    print(
+                        f"[SKIP] Line {finding.get('line', 0)} out of bounds in {filepath} "
+                        f"(file has {len(lines)} lines) — Rule: {finding.get('rule')}"
+                    )
                     skipped += 1
                     continue
 
