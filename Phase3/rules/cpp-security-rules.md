@@ -463,9 +463,6 @@
 ## Cppcheck
 
 
-
-## قوانین بحرانی - مدیریت حافظه
-
 - `autoVariables`
 - `returnReference`
 - `danglingReference`
@@ -489,9 +486,6 @@
 - `memsetClass`
 - `memsetClassReference`
 - `mallocOnClassError`
-
-## قوانین بحرانی - اشاره‌گرها و آدرس‌دهی
-
 - `nullPointer`
 - `nullPointerDefaultArg`
 - `nullPointerRedundantCheck`
@@ -504,9 +498,6 @@
 - `pointerOutOfBoundsCond`
 - `objectIndex`
 - `stringLiteralWrite`
-
-## قوانین بحرانی - دسترسی به آرایه و بافر
-
 - `arrayIndexOutOfBounds`
 - `arrayIndexOutOfBoundsCond`
 - `negativeIndex`
@@ -518,7 +509,6 @@
 - `stlOutOfBounds`
 - `negativeContainerIndex`
 
-## قوانین بحرانی - سرریز و محاسبات
 
 - `integerOverflow`
 - `floatConversionOverflow`
@@ -531,7 +521,6 @@
 - `invalidTestForOverflow`
 - `signConversion`
 
-## قوانین بحرانی - توابع ناامن
 
 - `invalidscanf`
 - `invalidScanfFormatWidth`
@@ -549,8 +538,6 @@
 - `invalidPrintfArgType_float`
 - `sprintfOverlappingData`
 
-## قوانین بحرانی - مدیریت فایل
-
 - `IOWithoutPositioning`
 - `readWriteOnlyFile`
 - `writeReadOnlyFile`
@@ -558,7 +545,6 @@
 - `seekOnAppendedFile`
 - `incompatibleFileOpen`
 
-## قوانین بحرانی - STL و کانتینرها
 
 - `invalidIterator1`
 - `iterators1`
@@ -575,7 +561,6 @@
 - `stlcstrthrow`
 - `derefInvalidIterator`
 
-## قوانین بحرانی - متفرقه
 
 - `ignoredReturnValue`
 - `missingReturn`
@@ -608,7 +593,6 @@
 - `arithOperationsOnVoidPointer`
 - `strPlusChar`
 
-## قوانین امنیتی - سطح WARNING
 
 - `compareBoolExpressionWithInt`
 - `comparisonOfBoolWithInvalidComparator`
@@ -667,8 +651,6 @@
 - `va_start_wrongParameter`
 - `pointerAdditionResultNotNull`
 
-## قوانین امنیتی - سطح PORTABILITY
-
 - `AssignmentAddressToInteger`
 - `AssignmentIntegerToAddress`
 - `CastIntegerToAddressAtReturn`
@@ -680,8 +662,6 @@
 - `fflushOnInputStream`
 - `invalidPointerCast`
 - `rethrowNoCurrentException`
-
-## قوانین امنیتی - سطح INFO (امنیتی)
 
 - `uninitdata`
 - `uninitStructMember`
