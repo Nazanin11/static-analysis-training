@@ -77,7 +77,7 @@ def get_all_issues():
     print(f"[INFO] All issues retrieved: {len(all_issues)}")
 
     return all_issues
-
+    
 
 def filter_findings(issues):
 
@@ -87,6 +87,13 @@ def filter_findings(issues):
     removed_other = 0
 
     for issue in issues:
+
+        # --------------------------------------------------
+        # Keep only ACTIVE issues
+        # --------------------------------------------------
+
+        if issue.get("status") != "OPEN":
+            continue
 
         impacts = issue.get("impacts", [])
 
