@@ -33,7 +33,14 @@
     "c:S6418",
     "c:S1313",
     "c:M23_222",
-    "c:M23_103"
+    "c:M23_103",
+    "c:S2259",
+    "c:S3519",
+    "c:S3529",
+    "c:S946",
+    "c:S836",
+    "c:S3949",
+    "c:S5000"
   ],
   "Semgrep": [
     "c.lang.security.double-free.double-free",
@@ -609,6 +616,7 @@
     "va_start_referencePassed",
     "va_end_missing",
     "va_list_usedBeforeStarted",
-    "va_start_subsequentCalls"
+    "va_start_subsequentCalls",
+    "allocaCalled"
   ]
 }

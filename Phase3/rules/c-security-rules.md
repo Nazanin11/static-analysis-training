@@ -40,6 +40,7 @@
 | c:M23_222 | The pointer returned by the C++ Standard Library functions "asctime", "ctime", "gmtime", "localtime", "localeconv", "getenv", "setlocale" or "strerror" must not be used following a subsequent call to the same function | VULNERABILITY | HIGH |
 | c:M23_103 | The right-hand operand of a logical "&&" or ..operator should not contain "persistent side effects" | VULNERABILITY | HIGH |
 
+
 ---
 
 
@@ -691,3 +692,4 @@
 - va_end_missing
 - va_list_usedBeforeStarted
 - va_start_subsequentCalls
+- allocaCalled
