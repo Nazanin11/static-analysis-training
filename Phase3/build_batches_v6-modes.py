@@ -33,12 +33,13 @@ from collections import defaultdict
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-INPUT_FILE  = "reports/sonarqube/merged_candidates.json"
-OUTPUT_FILE = "reports/llm_triage/llm_triage_batches.json"
+INPUT_FILE  = "reports/sonarqube/merged_candidates_with_cwe.json"
+OUTPUT_FILE = "reports/llm_triage/llm_triage_batches_with_cwe.json"
 BIRD_SRC_DIR = "/home/nazanin/Projects/bird-2.17.1"
 TAGS_FILE   = "tags"
 CG_FILE     = "bird.bc.callgraph.dot"
 SECURITY_RULES_FILE = "reports/c-security-rules.json"
+SECURITY_FILTERED_FILE = "reports/llm_triage/security_rule_filtered.json"
 
 MAX_TEST_FINDINGS = 100
 MAX_FILE_LINES    = 6000
@@ -464,6 +465,7 @@ def main():
     noise_rule_filtered = 0
     security_rule_filtered = 0
     severity_filtered = 0
+    security_rule_filtered_findings = []
 
     # Filter + deduplicate
     filtered = []
@@ -473,6 +475,7 @@ def main():
 
         component = f.get("component", "")
         filepath = component.split(":", 1)[1] if ":" in component else component
+        normalized_rule_id = normalize_rule_id(f)
 
         line = f.get("line", 0)
         # Drop obvious non-prod paths
@@ -481,22 +484,17 @@ def main():
             continue
 
         # Drop pure style/maintenance rules entirely
-        if rule_id in IGNORE_RULES:
+        if normalized_rule_id in IGNORE_RULES:
             ignore_rule_filtered += 1
             continue
 
         # Drop tool-noise artefacts from partial analysis
-        if rule_id in NOISE_RULES:
+        if normalized_rule_id in NOISE_RULES:
             noise_rule_filtered += 1
             continue
 
 
-        # Keep only findings whose rule exists in the central security rule set
-        normalized_rule_id = normalize_rule_id(f)
-
-        if normalized_rule_id not in security_rule_ids:
-            security_rule_filtered += 1
-            continue
+        
 
         if MODE == 1:
             # Strict: only high-value severities
@@ -505,12 +503,42 @@ def main():
                 continue
         else:
             # MODE 2: keep SECURITY_RULES even if severity is low (style/info)
-            if (sev not in ALLOWED_SEVERITIES) and (rule_id not in SECURITY_RULES):
+            if (sev not in ALLOWED_SEVERITIES) and (normalized_rule_id not in SECURITY_RULES):
                 severity_filtered += 1
                 continue
+                
+        # Keep only findings whose rule exists in the central security rule set
+        
+        if normalized_rule_id not in security_rule_ids:
+            security_rule_filtered += 1
 
+            security_rule_filtered_findings.append({
+                "rule": rule_id,
+                "normalized_rule": normalized_rule_id,
+                "severity": f.get("severity", ""),
+                "type": f.get("type", ""),
+                "externalRuleEngine": f.get("externalRuleEngine", ""),
+                "component": f.get("component", ""),
+                "line": f.get("line", 0),
+                "message": f.get("message", ""),
+                "status": f.get("status", ""),
+            })
+
+            continue
         filtered.append(f)
 
+    with open(SECURITY_FILTERED_FILE, "w", encoding="utf-8") as fh:
+        json.dump(
+            security_rule_filtered_findings,
+            fh,
+            indent=2,
+            ensure_ascii=False
+        )
+
+    print(
+        f"[SECURITY RULE FILTER] {len(security_rule_filtered_findings)} "
+        f"findings saved to {SECURITY_FILTERED_FILE}"
+    )
     seen_keys: set = set()
     deduped = []
     for f in filtered:
