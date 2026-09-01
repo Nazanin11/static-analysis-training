@@ -1176,13 +1176,13 @@ codeql/cpp-queries
 
 ---
 
-## 12.3 Run the C/C++ Security and Quality Suite
+## 12.3 Run the C/C++ Security and experimental Suite
 
-Run the default CodeQL C/C++ security and quality query suite:
+Run the default CodeQL C/C++ security and experimental query suite:
 
 ```bash
 codeql database analyze bird-db \
-  codeql/cpp-queries:codeql-suites/cpp-security-and-quality.qls \
+  codeql/cpp-queries:codeql-suites/cpp-security-experimental.qls \
   --format=sarif-latest \
   --output=reports/codeql/codeql.sarif
 ```
