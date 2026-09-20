@@ -1041,9 +1041,8 @@ grep -c '<error ' reports/cppcheck/cppcheck-final.xml
 For the final analysis:
 ```text
 Before: 119
-After:  119
+After:  113
 ```
-No findings were removed because all findings in the generated Cppcheck report were already within the required source scope.
 
 An additional scope verification was performed to ensure that no locations outside the allowed directories remained in the filtered report.
 
@@ -1233,7 +1232,7 @@ jq '.runs[].results | length' \
 Final verified result:
 
 ```text
-246 findings
+82 findings
 ```
 
 Show findings grouped by source file:
@@ -1454,10 +1453,10 @@ The verified results at this stage were:
 
 | Tool     | Configuration               | Findings |
 | -------- | --------------------------- | -------: |
-| Cppcheck | Scope Filtering             |  **119** |
+| Cppcheck | Scope Filtering             |  **113** |
 | Semgrep  | Automatic ruleset           |    **0** |
 | Semgrep  | Security Audit              |   **42** |
-| CodeQL   | C/C++ Security and Quality  |  **246** |
+| CodeQL   | C/C++ Security and experimental  |  **82** |
 
 
 ---
@@ -1562,7 +1561,422 @@ sonar-scanner
 During the analysis, SonarQube imported the external issues from the generated JSON reports.
 
 ---
-# 16. BIRD Tag and Call Graph Setup
+
+# 16. SonarQube Findings Export and Merge
+
+## 16.1 Objective
+
+The SonarQube findings were exported and consolidated to create a single dataset containing **Reliability**, **Security**, and **Security Hotspots** findings.
+The resulting consolidated dataset was then enriched with **CWE metadata** from CodeQL, Cppcheck, SonarQube, and Semgrep. This enriched dataset is used as input for the later LLM-assisted triage stage.
+
+---
+
+## 16.2 Export Security and Reliability Findings
+
+Because the number of SonarQube issues can exceed the API page size, findings were retrieved page by page using the SonarQube Issues API with a page size of 500.
+
+The export script:
+
+[export_sonar_security_reliability.py](scripts/export_sonar_security_reliability.py)
+
+The script:
+
+* Retrieves all SonarQube issues using the /api/issues/search API.
+* Handles pagination with ps=500.
+* Keeps findings with RELIABILITY or SECURITY software quality.
+* Removes MAINTAINABILITY findings.
+
+Generates the following output:
+```text
+reports/sonarqube/sonarqube-security-reliability.json
+```
+
+Run:
+```bash
+python3 scripts/export_sonar_security_reliability.py
+```
+Result:
+```text
+RELIABILITY: 196
+SECURITY:    130
+TOTAL:       326
+```
+---
+
+## 16.3 Export Security Hotspots
+
+Security Hotspots are retrieved separately using the SonarQube Hotspots API.
+
+Run:
+```bash
+curl -s -u "$SONAR_TOKEN:" \
+"http://localhost:9000/api/hotspots/search?projectKey=bird-2.17.1-scoped&ps=500" \
+-o reports/sonarqube/sonarqube-hotspots.json
+```
+Verify the number of hotspots:
+```bash
+jq '.paging.total' reports/sonarqube/sonarqube-hotspots.json
+```
+Result:
+```text
+Security Hotspots: 81
+```
+
+The generated file is:
+```text
+reports/sonarqube/sonarqube-hotspots.json
+```
+
+## 16.4 Merge SonarQube Findings
+
+The Security/Reliability findings and Security Hotspots were merged into a single JSON dataset.
+
+The merge script:
+
+[merge_sonarqube_findings.py](scripts/merge_sonarqube_findings.py)
+
+The script reads:
+```text
+reports/sonarqube/sonarqube-security-reliability.json
+reports/sonarqube/sonarqube-hotspots.json
+```
+and generates:
+```text
+reports/sonarqube/merged_candidates.json
+```
+Run:
+```bash
+python3 scripts/merge_sonarqube_findings.py
+```
+The resulting consolidated dataset contains:
+```text
+
+Reliability:       196
+Security:          130
+Security Hotspots:  81
+-----------------------
+Total:             407
+```
+The 407 findings represent the complete consolidated dataset used for the subsequent CWE enrichment and LLM-assisted triage stages.
+
+---
+
+# 17. CWE Metadata Enrichment
+
+## 17.1 Objective
+
+The consolidated findings were enriched with **Common Weakness Enumeration (CWE)** metadata.
+CWE information was obtained from the metadata available for each analysis tool and added to the corresponding findings without removing findings for which a CWE mapping was unavailable.
+
+The enriched dataset is:
+
+```text
+reports/sonarqube/merged_candidates_with_cwe.json
+```
+---
+
+## 17.2 Add CWE Metadata to CodeQL Findings
+
+CodeQL findings in merged_candidates.json were enriched using CWE information from the CodeQL query metadata.
+
+The enrichment script is:
+
+[add_codeql_cwe.py](scripts/add_codeql_cwe.py)
+
+The enrichment script was executed using:
+
+```bash
+python3 scripts/add_codeql_cwe.py
+```
+
+The script reports:
+
+```text
+Total findings:          407
+CodeQL findings:         82
+CodeQL with CWE:         82
+CodeQL without CWE:      0
+```
+
+The enriched output was generated as:
+
+```text
+reports/sonarqube/merged_candidates_with_cwe.json
+```
+
+The resulting CodeQL findings now contain a `cwe` field. For example:
+
+```json
+{
+  "rule": "external_CodeQL:cpp/unbounded-write",
+  "cwe": [
+    "CWE-120",
+    "CWE-787",
+    "CWE-805"
+  ]
+}
+```
+
+The original finding information is preserved, while the CWE metadata is added as additional context for later LLM triage.
+
+---
+
+## 17.3 Add CWE Metadata to Cppcheck Findings
+
+Cppcheck findings were enriched using CWE mappings from the Cppcheck rule metadata.
+
+The metadata file is:
+
+```text
+cppcheck/cppcheck-rules.json
+```
+
+The rule metadata was verified using:
+
+```bash
+python3 - <<'PY'
+import json
+
+FILE = "cppcheck/cppcheck-rules.json"
+
+with open(FILE, encoding="utf-8") as f:
+    data = json.load(f)
+
+rules = data["rules"]
+
+with_cwe = [r for r in rules if r.get("cwe")]
+
+print("Total rules:", len(rules))
+print("Rules with CWE:", len(with_cwe))
+print("Rules without CWE:", len(rules) - len(with_cwe))
+PY
+```
+
+The result was:
+
+```text
+Total rules: 308
+Rules with CWE: 277
+Rules without CWE: 31
+```
+
+The enrichment was then performed using the following script:
+
+
+[add_cppcheck_cwe.py](scripts/add_cppcheck_cwe.py)
+
+
+The script was executed using:
+
+```bash
+python3 scripts/add_cppcheck_cwe.py
+```
+
+The script reports:
+
+```text
+Total findings:          407
+Cppcheck findings:        95
+Cppcheck with CWE:        28
+Cppcheck without CWE:     67
+Matched rules:             28
+```
+
+The enriched output was generated as:
+
+```text
+reports/sonarqube/merged_candidates_with_cwe.json
+```
+
+The resulting Cppcheck findings now contain a `cwe` field when a corresponding CWE mapping is available. For example:
+
+```json
+{
+  "rule": "external_Cppcheck:nullPointerArithmeticRedundantCheck",
+  "cwe": [
+    "CWE-682"
+  ]
+}
+```
+
+For findings whose Cppcheck rules do not have a CWE mapping, the field remains empty:
+
+```json
+{
+  "rule": "external_Cppcheck:allocaCalled",
+  "cwe": []
+}
+```
+
+
+Therefore, missing CWE metadata does not cause a Cppcheck finding to be removed.
+
+---
+## 17.4 Add CWE Metadata to SonarQube Findings
+
+SonarQube-originated findings were enriched using rule metadata retrieved from the SonarQube API.
+
+The enrichment script is:
+
+[add_sonar_cwe.py](scripts/add_sonar_cwe.py)
+
+
+The script identifies the unique SonarQube rules present in the findings and retrieves their rule metadata using:
+
+```text
+/api/rules/show?key=<ruleKey>
+```
+
+CWE identifiers are then extracted from the rule `descriptionSections` and added to the corresponding findings.
+
+The script was executed using:
+
+```bash
+python3 scripts/add_sonar_cwe.py
+```
+
+The script reported:
+
+```text
+Total findings:          407
+SonarQube findings:      188
+Unique Sonar rules:      18
+
+SonarQube with CWE:      139
+SonarQube without CWE:   49
+
+Sonar rules:             18
+Rules with CWE:          9
+Rules without CWE:       6
+```
+
+The enriched output was written to:
+
+```text
+reports/sonarqube/merged_candidates_with_cwe.json
+```
+---
+
+## 17.5 Verify Security Hotspot CWE Metadata
+
+Security Hotspots were already included in the consolidated dataset during the merge stage.
+
+Their CWE metadata was verified separately.
+
+The consolidated file contained:
+```text
+Findings with ruleKey: 81
+With CWE:             81
+Without CWE:           0
+```
+The 81 Security Hotspots were associated with the following SonarQube rules:
+```text
+c:S5816: 13
+c:S5813: 41
+c:S5801: 27
+```
+All three rules were mapped to:
+```text
+CWE-120
+```
+Thus, all Security Hotspots in the consolidated dataset had CWE metadata available.
+
+---
+## 17.6 Add CWE Metadata to Semgrep Findings
+
+Semgrep findings were enriched using CWE information from the Semgrep rule metadata.
+
+The enrichment script is:
+
+[add_semgrep_cwe.py](scripts/add_semgrep_cwe.py)
+
+
+
+The enrichment was performed using the following script:
+
+```bash
+python3 scripts/add_semgrep_cwe.py
+```
+
+The script identifies Semgrep findings using the `externalRuleEngine` field and extracts the original Semgrep rule ID from the finding's `rule` field.
+
+For example, a Semgrep finding contains a rule value such as:
+
+```text
+external_Semgrep:c.lang.security.insecure-use-string-copy-fn.insecure-use-string-copy-fn
+```
+
+The script extracts the original Semgrep rule ID:
+
+```text
+insecure-use-string-copy-fn
+```
+
+This ID is then matched against the `id` field in the Semgrep rule metadata. The corresponding CWE metadata is retrieved and added to the finding.
+
+For example:
+
+```json
+{
+  "id": "insecure-use-string-copy-fn",
+  "cwe": [
+    "CWE-676: Use of Potentially Dangerous Function"
+  ]
+}
+```
+
+is converted to the following CWE metadata in the finding:
+
+```json
+{
+  "cwe": [
+    "CWE-676"
+  ]
+}
+```
+
+The enrichment script produced the following results:
+
+```text
+============================================================
+Semgrep CWE Enrichment
+============================================================
+Total findings:          407
+Semgrep findings:        42
+Unique Semgrep rules:    1
+
+Resolving Semgrep rules:
+------------------------------------------------------------
+insecure-use-string-copy-fn                   -> CWE-676
+
+============================================================
+Enrichment completed
+============================================================
+Total findings:          407
+Semgrep findings:        42
+Semgrep with CWE:        42
+Semgrep without CWE:     0
+
+Semgrep rules:           1
+Rules with CWE:          1
+Rules without CWE:       0
+```
+
+All 42 Semgrep findings were successfully enriched with CWE metadata.
+
+---
+## 17.7 Final Enriched Dataset
+
+After the CWE enrichment steps, the consolidated findings are available in:
+```text
+reports/sonarqube/merged_candidates_with_cwe.json
+```
+This file preserves the original findings while adding CWE metadata where a valid mapping is available.
+
+The enriched CWE field provides additional security context for the subsequent LLM-assisted false-positive triage stage.
+
+---
+# 18. BIRD Tag and Call Graph Setup
 
 This section describes the commands used to generate **CTags symbol information** and the **LLVM Call Graph** for BIRD v2.17.1.
 
@@ -1570,7 +1984,7 @@ The generated symbol and call-graph information was used to provide additional s
 
 ---
 
-## 16.1 Install Universal Ctags
+## 18.1 Install Universal Ctags
 
 Install Universal Ctags:
 
@@ -1583,7 +1997,7 @@ Verify the installation:
 ctags --version
 ```
 
-## 16.2 Generate CTags
+## 18.2 Generate CTags
 
 Navigate to the BIRD source directory:
 ```bash
@@ -1616,7 +2030,7 @@ The generated tags file provides symbol information such as:
 
 This information was later used by the batch-processing scripts to obtain additional context for reported findings.
 
-## 16.3 Install WLLVM
+## 18.3 Install WLLVM
 
 Install WLLVM:
 
@@ -1630,7 +2044,7 @@ Verify:
 which wllvm
 which extract-bc
 ```
-## 16.4 Configure LLVM/WLLVM
+## 18.4 Configure LLVM/WLLVM
 
 Configure WLLVM to use Clang:
 ```bash
@@ -1647,7 +2061,7 @@ Verify the installed LLVM tools:
 clang --version
 llvm-config --version
 ```
-## 16.5 Rebuild BIRD with WLLVM
+## 18.5 Rebuild BIRD with WLLVM
 
 Navigate to the BIRD source directory:
 ```bash
@@ -1670,7 +2084,7 @@ Build BIRD using WLLVM:
 ```bash
 make
 ```
-## 16.6 Extract LLVM Bitcode
+## 18.6 Extract LLVM Bitcode
 
 After the build completes, extract the LLVM bitcode from the generated BIRD executable:
 ```bash
@@ -1683,7 +2097,7 @@ file bird.bc
 ```
 The resulting bird.bc file contains the LLVM intermediate representation required for subsequent LLVM analysis.
 
-## 16.7 Generate the LLVM Call Graph
+## 18.7 Generate the LLVM Call Graph
 
 Verify the installed LLVM opt version:
 ```bash
@@ -1704,7 +2118,7 @@ ls -lh *.dot
 find . -maxdepth 1 -name "*.dot" -print
 head -20 bird.bc.callgraph.dot
 ```
-## 16.8 Count Call Graph Nodes and Edges
+## 18.8 Count Call Graph Nodes and Edges
 
 Count the nodes:
 ```bash
@@ -1721,7 +2135,49 @@ Edges: 7549
 ```
 ---
 
-# 17. False Positive Reduction Approach
+
+
+# 19. Security Rule Set Consolidation
+
+## Objective
+
+To create a unified reference for the security rules used in the static-analysis workflow, all rules belonging to the [Rule-Set.md](Rule-Set.md) across the four analysis tools were collected and consolidated into a single JSON file:
+
+* **SonarQube**
+* **Semgrep**
+* **CodeQL**
+* **Cppcheck**
+
+The rule collection was based on the rule and query sets identified during the **Rule-Set** stage, as well as the corresponding security-related analysis results.
+
+## Consolidated Security Rules
+
+The complete consolidated rule set is stored in:
+
+```text
+c-security-rules.json
+```
+
+This file contains the **full set of rules identified as belonging to the Security category for C/C++ across all four tools**. The rules are grouped according to their originating analysis tool:
+
+```text
+c-security-rules.json
+├── SonarQube
+├── Semgrep
+├── CodeQL
+└── Cppcheck
+```
+
+Each tool's section contains its corresponding security-rule identifiers. Therefore, the file provides a single, centralized representation of the security-related C/C++ rules collected from the complete static-analysis toolchain.
+
+This file will be used in the subsequent analysis workflow by:
+
+```text
+build_batches_v6-modes.py
+```
+---
+
+# 20. False Positive Reduction Approach
 
 During the static analysis of BIRD v2.17.1, several techniques were applied to reduce false-positive findings and improve the relevance of the reported results.
 
@@ -1730,9 +2186,66 @@ The following approaches were used:
 - **Build and Compilation Context:** SonarQube Build Wrapper and the `compile_commands.json` generated by Bear were used to provide the analyzers with the actual compilation context, including compiler options, include paths, preprocessor definitions, and compiled source files. This helped reduce findings caused by incomplete or incorrect build information.
 - **Analysis Scope Filtering:** Source directories and generated files that were not relevant to the analysis were excluded. CodeQL results were also filtered to keep findings within the defined BIRD source scope. Similar scope restrictions were applied to the other tools where appropriate.
 - **Focused Rule Sets:** Cppcheck and Semgrep were configured with more targeted rule sets to reduce low-value informational and style-related findings and focus on more relevant security and reliability issues.
+- **Security Rule Set Filtering:** An additional rule-based filtering stage was introduced using the consolidated `c-security-rules.json` file. Findings whose rules are not included in the defined security-rule set are removed before the subsequent analysis stages. This further reduces findings that are outside the targeted security scope.
 - **CTags:** A CTags symbol database was generated to provide function, structure, macro, and symbol information for additional finding context.
 - **LLVM Call Graph:** An LLVM call graph was generated to understand relationships between functions and determine whether reported code is reachable and how it is used within the program.
 
 These techniques reduced analysis noise and provided additional context for manually reviewing the remaining findings. The resulting information was also used to enrich findings before performing LLM-assisted false-positive analysis.
+
+---
+
+# 21. Finding Preparation and Batch Generation
+
+The [build_batches_v6-modes.py](scripts/build_batches_v6-modes.py) script is responsible for preparing, filtering, enriching, and organizing static-analysis findings into batches for LLM-assisted analysis. It takes the consolidated findings produced in the previous analysis stages, applies a series of filtering and deduplication steps, collects the required source-code and contextual information, and generates the final batch file used as input for the LLM.
+
+### Main Updates
+
+The following changes were added to the previous batch-generation version:
+
+* **Security Rule Filtering:** The script now loads the centralized `c-security-rules.json` file and keeps only findings whose rule identifier exists in the consolidated security-rule set.
+
+* **External Rule ID Normalization:** Rule identifiers from external tools are normalized before comparison. For example, prefixes such as `external_Cppcheck:` are removed so that the rule can be correctly matched against the centralized rule set.
+
+* **CWE-Enriched Input:** The script now uses `merged_candidates_with_cwe.json` as its input, allowing the generated batches to retain the CWE information associated with each finding.
+
+* **Security-Rule Filtering Report:** Findings removed by the security-rule filter are separately stored in `security_rule_filtered.json` for traceability.
+
+
+
+### Execution
+
+The updated script was executed with:
+
+```bash
+python3 build_batches_v6-modes.py
+```
+
+### Filtering Results
+
+The script produced the following results:
+
+```text
+[INPUT]                 407 findings
+[PATH FILTER]           0 removed
+[IGNORE RULE FILTER]    37 removed
+[NOISE RULE FILTER]     30 removed
+[SECURITY RULE FILTER]  18 removed
+[SEVERITY FILTER]       82 removed
+[AFTER ALL FILTERS]     240 findings
+[DEDUPLICATION]         14 removed
+[UNIQUE FINDINGS]       226 findings
+[PILOT LIMIT]           0 removed
+[PILOT FINDINGS]        226 findings
+```
+
+The security-rule stage removed **18 findings** whose rules were not present in the consolidated security-rule set.
+
+The final result was **226 unique findings**, which were converted into individual batches with no skipped findings:
+
+```text
+[DONE] 226 batches written to reports/llm_triage/llm_triage_batches_with_cwe.json (0 skipped)
+```
+
+The resulting batch file is used as the input for the subsequent **LLM-assisted false-positive analysis**.
 
 ---
