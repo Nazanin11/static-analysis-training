@@ -171,6 +171,12 @@ has_more: false
 
 Cline reported the project name `home-nazanin-Projects-bird-2.17-2-.1` and root path `/home/nazanin/Projects/bird-2.17 (2).1`. This confirmed that Cline could invoke an MCP tool and use its response.
 
+The following screenshot shows the execution of the `list_projects` tool in Cline and the returned indexed project information.
+
+![Cline list projects](screenshots/02-cline-list-projects.png)
+
+*Figure 1. Listing indexed projects through the Codebase Memory MCP server.*
+
 ## 8. Test 2: Find a function and retrieve its source
 
 ### 8.1. Test prompt
@@ -224,6 +230,13 @@ home-nazanin-Projects-bird-2.17-2-.1.proto.bgp.packets.bgp_decode_nlri_flow4
 
 The result identified the symbol as a function in `proto/bgp/packets.c`, lines 2066–2124.
 
+The screenshot below shows Cline calling `search_graph` to locate the target function in the indexed BIRD project.
+
+![Cline search graph](screenshots/03-cline-search-graph.png)
+
+*Figure 2. Searching for bgp_decode_nlri_flow4 using the search_graph tool.*
+
+
 ### 8.3. Second call: `get_code_snippet`
 
 Cline then called `get_code_snippet` using the qualified name returned by the first tool:
@@ -253,6 +266,19 @@ callees: 11
 The tool returned the full source of the function. Its main operations, as shown in the returned source, were to read an optional Add-Path identifier, parse flow lengths, validate the flow data, extract a destination IPv4 prefix when present, construct a flow network address, optionally apply validation associated with RFC 8955, and update routing information.
 
 The response also warned that some regions of `proto/bgp/packets.c` had not been fully parsed during graph indexing. This may make graph relationships incomplete; the returned source was used as the primary evidence for the explanation.
+
+The following screenshot shows the second MCP tool call, where Cline used the qualified name returned by `search_graph` to retrieve the full source code of the function.
+
+![Cline get code snippet](screenshots/04-cline-get-code-snippet.png)
+
+*Figure 3. Retrieving the full source code using get_code_snippet.*
+
+After retrieving the function source, Cline generated a concise explanation based on the returned code.
+
+![Cline final response](screenshots/05-cline-final-response.png)
+
+*Figure 4. Cline's final explanation of the retrieved function.*
+
 
 ## 9. Verify the result directly through the CLI
 
