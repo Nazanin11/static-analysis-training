@@ -1,0 +1,1 @@
+{"nodes": [{"id": "$graphify-root$_client_client_h", "label": "client.h", "file_type": "code", "source_file": "client/client.h", "source_location": "L1"}], "edges": [], "raw_calls": [], "parse_errors": {"first_error_line": 39, "multiline_error": false}}
